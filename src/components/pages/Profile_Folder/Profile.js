@@ -25,7 +25,7 @@ const Profile = (props) => {
         .catch(err => console.log('THIS IS ERR',err))
     }
     
-    if(foundProfile.name){
+    if(foundProfile){
         return <ExistingProfile changePassword={props.changePassword} profile={foundProfile}/>
     } else {
         return <CreateProfile user={props.user} />
