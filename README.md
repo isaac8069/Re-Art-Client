@@ -2,7 +2,7 @@
 
 # Re-Art
 
-Getting tired of the same old art on the walls of your home? Using our seasonal subscription service, you can receive a new collection of artwork delivered right to your door, tailored to your unique taste in art.
+Getting tired of the same old art on the walls of your home? Use our subscription service to receive a new collection of artwork tailored to your unique taste in art and delivered right to your door, season after season.
 
 ## Tech stack
 
