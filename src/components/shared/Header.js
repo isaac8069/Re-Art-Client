@@ -23,16 +23,40 @@ const authenticatedOptions = (
 				Profile
 			</Link>
 		</Nav.Link>
+		<Nav.Link>
+		    <Link to='available_art' style={linkStyle}>
+				Art
+			</Link>
+        </Nav.Link>
+		<Nav.Link>
+		    <Link to='subscription' style={linkStyle}>
+				Subscription Plans
+			</Link>
+        </Nav.Link>
 	</>
 )
 
 const unauthenticatedOptions = (
 	<>
         <Nav.Link>
-		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
+		    <Link to='sign-up' style={linkStyle}>
+				Sign Up
+			</Link>
         </Nav.Link>
         <Nav.Link>
-		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
+		    <Link to='sign-in' style={linkStyle}>
+				Sign In
+			</Link>
+        </Nav.Link>
+		<Nav.Link>
+		    <Link to='available_art' style={linkStyle}>
+				Art
+			</Link>
+        </Nav.Link>
+		<Nav.Link>
+		    <Link to='subscription' style={linkStyle}>
+				Subscription Plans
+			</Link>
         </Nav.Link>
 	</>
 )
