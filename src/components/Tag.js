@@ -21,6 +21,7 @@ const getTags = () => {
         setTags(foundTags.tags)
     })
     .catch(err => console.log(err))
+    //test
 }
 
 const handleCheck = (e) => {
@@ -50,15 +51,26 @@ const postTags = (e) => {
     .catch(err => console.log(err))
 }
 
-
 return (
-    <form onSubmit={postTags}>
-        <div>
-            <label htmlFor="name">Name:</label>
-            <input type="checkbox" name="name" id="name" onChange={handleCheck} value={tags ? 'checked' : ''} />
-        </div>
-        <input type="submit" value="Submit" />
-    </form>
+    <div>
+        <h1>Test</h1>
+        {
+        tags.map(tag => (
+            <li>
+                {tag.name}
+            </li>
+        ))
+        }
+        <form onSubmit={postTags}>
+            <div>
+                <label htmlFor="name">Name:</label>
+                <input type="checkbox" name="name" id="name" onChange={handleCheck} value={tags ? 'checked' : ''} />
+            </div>
+            <input type="submit" value="Submit" />
+        </form>
+          
+    </div>
+   
 )
 }
 
