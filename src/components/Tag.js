@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 const Tag = (props) => {
-// const posters = bounties.map(b => {
-//     return <Poster changeCurrent={changeCurrent} bounty={b} key={b.name} />
-//     })
-
-// let allIngredients = props.ingredients.map(mapIngredient => (
-//     <li onClick={props.add}>
-//         <Ingredient ingredient={mapIngredient} />
-//     </li>
-// ))
-
-
 const [tags, setTags] = useState([])
 // const [tags, setTags] = useState(false)
-const [allTags, setAllTags] = useState({})
+
 
 useEffect(() => {
   getTags()
@@ -24,11 +13,12 @@ const getTags = () => {
   fetch('http://localhost:8000/tags')
     .then(res => res.json())
     .then(foundTags => {
-    //   console.log(foundTags.tags[0]._id)
-    foundTags.tags.map(x =>{
-        console.log('What is X', x)
-    })
-      setTags(foundTags)
+        console.log('Foung Tags by INDEX', foundTags.tags)
+        // foundTags.tags.map(t =>{
+        //     console.log('What is T', t._id)
+        //     console.log('THIS IS T NAME', t.name)
+        // })
+        setTags(foundTags.tags)
     })
     .catch(err => console.log(err))
 }
