@@ -20,12 +20,11 @@ const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
-	const [myTags, setMyTags] = useState(['0','1','2'])
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
+	// console.log('user in app', user)
+	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
-		console.log('clear user ran')
+		// console.log('clear user ran')
 		setUser(null)
 	}
 
@@ -76,7 +75,7 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} user={user} myTags={myTags} />
+							<Profile msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
 				<Route
