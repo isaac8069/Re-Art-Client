@@ -1,0 +1,75 @@
+import React, { useEffect, useState } from 'react'
+
+const Tag = (props) => {
+// const posters = bounties.map(b => {
+//     return <Poster changeCurrent={changeCurrent} bounty={b} key={b.name} />
+//     })
+
+// let allIngredients = props.ingredients.map(mapIngredient => (
+//     <li onClick={props.add}>
+//         <Ingredient ingredient={mapIngredient} />
+//     </li>
+// ))
+
+
+const [tags, setTags] = useState([])
+// const [tags, setTags] = useState(false)
+const [allTags, setAllTags] = useState({})
+
+useEffect(() => {
+  getTags()
+}, [])
+
+const getTags = () => {
+  fetch('http://localhost:8000/tags')
+    .then(res => res.json())
+    .then(foundTags => {
+    //   console.log(foundTags.tags[0]._id)
+    foundTags.tags.map(x =>{
+        console.log('What is X', x)
+    })
+      setTags(foundTags)
+    })
+    .catch(err => console.log(err))
+}
+
+const handleCheck = (e) => {
+    console.log("CHECKED" ,handleCheck)
+    setTags({ ...tags, [e.target.name]: e.target.checked })
+}
+
+const postTags = (e) => {
+    e.preventDefault()
+    let preJSONBody = {
+        name: tags[0]._id,
+        checked: Boolean(tags.name)
+    }
+    fetch('http://localhost:8000/tags', {
+        method: 'POST',
+        body: JSON.stringify(preJSONBody),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(postedTags => {
+        props.refreshTags()
+        setTags({
+            name: '',
+            checked: false
+        })
+    })
+    .catch(err => console.log(err))
+}
+
+
+return (
+    <form onSubmit={postTags}>
+        <div>
+            <label htmlFor="name">Name:</label>
+            <input type="checkbox" name="name" id="name" onChange={handleCheck} value={tags ? 'checked' : ''} />
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+)
+}
+
+export default Tag
