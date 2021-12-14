@@ -7,12 +7,14 @@ import { v4 as uuid } from 'uuid'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/shared/Header'
 import RequireAuth from './components/shared/RequireAuth'
-import Home from './components/Home'
+import Home from './components/pages/Home_Folder/Home'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
-import Profile from './components/auth/Profile'
+import Profile from './components/pages/Profile_Folder/Profile'
+import Art from './components/pages/Art_Folder/Art'
+import Subscription from './components/pages/Subscription_Folder/Subscription'
 
 const App = () => {
 
@@ -75,6 +77,14 @@ const App = () => {
 						<RequireAuth user={user}>
 							<Profile msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
+				/>
+				<Route
+					path='/available_art'
+					element={<Art msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/subscription'
+					element={<Subscription msgAlert={msgAlert} user={user} />}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
