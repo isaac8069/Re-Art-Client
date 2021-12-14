@@ -1,19 +1,3 @@
-// import React, { useState } from 'react'
-
-// const Subscription = (props) => {
-
-
-//     return (
-//         <div>
-//             This is Subscription page
-//         </div>
-//     )
-
-// }
-
-
-// export default Subscription
-
 import React, { useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -22,7 +6,8 @@ import CheckoutForm from './CheckoutForm';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
- 
+
+//message to appear if card payment is successful
 const successMessage = () => {
   return (
     <div className="success-msg">
@@ -35,6 +20,7 @@ const successMessage = () => {
   )
 }
  
+// styled cart of items to show next to payment information
 const cart = () => {
   return (
     <React.Fragment>
@@ -80,6 +66,7 @@ const cart = () => {
   )
 }
  
+// checkout page structure
 function Subscription() {
   const [paymentCompleted, setPaymentCompleted] = useState(false);
  
