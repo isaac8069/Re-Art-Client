@@ -50,7 +50,6 @@ const postTags = (e) => {
     .catch(err => console.log(err))
 }
 
-
 return (
     <form onSubmit={postTags}>
         <div>
