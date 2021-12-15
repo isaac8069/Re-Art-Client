@@ -29,11 +29,11 @@ export default function CheckoutForm(props) {
     // stripe api hooks
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    // shipping data hooks
-    const [recipient, setRecipient] = useState('');
-    const [addressLine, setAddressLine] = useState('');
-    const [city, setCity] = useState('');
-    const [postalCode, setPostalCode] = useState('');
+    // // shipping data hooks
+    // const [recipient, setRecipient] = useState('');
+    // const [addressLine, setAddressLine] = useState('');
+    // const [city, setCity] = useState('');
+    // const [postalCode, setPostalCode] = useState('');
     // declare stripe and elements
     const stripe = useStripe();
     const elements = useElements();
@@ -60,12 +60,12 @@ export default function CheckoutForm(props) {
             },
         };
         // can potentially post these to mongodb as a stretch goal
-        const shippingAddressObj = {
-            recipient,
-            addressLine,
-            city,
-            postalCode,
-        }
+        // const shippingAddressObj = {
+        //     recipient,
+        //     addressLine,
+        //     city,
+        //     postalCode,
+        // }
 
         // setup payment method for server use
         const paymentMethodResult = await stripe.createPaymentMethod(paymentMethodObj);
@@ -85,12 +85,14 @@ const handleResponse = response => {
         return;
     }
     props.setPaymentCompleted(response.success ? true : false);
+    props.setSubscriptionCompleted(response.success ? true : false);
+    //console.log(props.setSubscriptionCompleted)
 };
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
           {/* collect shipping information for potential database use later */}
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
+          {/* <h4 className="d-flex justify-content-between align-items-center mb-3">
               <span className="text-muted">Shipping information</span>
           </h4>
         <div className="row">
@@ -136,7 +138,7 @@ const handleResponse = response => {
                   onChange={e => setPostalCode(e.target.value)}
                 />
             </div>
-        </div>
+        </div> */}
         {/* // collect credit card information for use with stripe api and server */}
         <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-muted">Pay with card</span>
