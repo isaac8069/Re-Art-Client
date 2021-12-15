@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
+import { useNavigate } from 'react-router-dom'
 import Tag from '../../Tag'
 
 const CreateProfile = (props) => {
 
+  const navigate = useNavigate();
+
   const [newProfile, setNewProfile] = useState({
     //Other stuff will go in this object but basically we need to declare a property called tags as an array so that the spread operator will work in the first call of handleCheck
-    tags:[]
+    tags:[],
+    isSubscribed: false,
+    userId: props.user._id
   })
   const [tags, setTags] = useState([])
 
@@ -43,10 +48,33 @@ const CreateProfile = (props) => {
       .catch(err => console.log(err))
   }
 
+
+  const postProfile = (e) =>{
+    e.preventDefault()
+    console.log('Pressed Submit button')
+    let preJSONBody = {
+      name: newProfile.name,
+      address: newProfile.address,
+      tags: newProfile.tags,
+      isSubscribed: newProfile.isSubscribed,
+      userId: newProfile.userId
+    }
+    fetch('http://localhost:8000/profiles',{
+      method: 'POST',
+      body: JSON.stringify(preJSONBody),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response=>response.json())
+    .then(postedBounty=> {
+      navigate('/')
+    })
+    .catch(err=>console.error(err))
+  }
+
   return (
     <div>
       <h1>Create a Profile</h1>
-      <form>
+      <form onSubmit={postProfile}>
         <div>
           <label htmlFor="name">Name:</label>
           <input required onChange={handleChange} type="text" name="name" id="name"/>
@@ -55,10 +83,6 @@ const CreateProfile = (props) => {
           <label htmlFor="address">Address:</label>
           <input required onChange={handleChange} type="text" name="address" id="address"/>
         </div>
-        {/* <div>
-          <label htmlFor="creditCard">Credit Card #:</label>
-          <input onChange={handleChange} type="number" name="creditCard" id="creditCard"/>
-        </div> */}
         <div>
           <h2>Favorite Categories</h2>
           {
@@ -70,6 +94,7 @@ const CreateProfile = (props) => {
             ))
           }
         </div>
+        <button type="submit">Click Here to Create Profile</button>
       </form>
     </div>
   )
