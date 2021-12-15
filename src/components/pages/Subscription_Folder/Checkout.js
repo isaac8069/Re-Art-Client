@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
@@ -73,10 +73,35 @@ const cart = () => {
 function Checkout() {
     // boolean for testing successful payment
     const [paymentCompleted, setPaymentCompleted] = useState(false);
-    // boolean for changing isSubscribed in data base
+    // boolean for changing isSubscribed based on form response
     const [subscriptionCompleted, setSubscriptionCompleted] = useState(false)
+    // boolean for communication with database isSubscribed
+    // const [newSubscription, setNewSubscription] = useState()
+
     // return success message or CheckoutForm component
-    console.log("this is state sC", subscriptionCompleted)
+    console.log("this is state subscriptionCompleted", subscriptionCompleted)
+    // console.log("this is state newSubscription", newSubscription)
+    // setNewSubscription({isSubscribed:subscriptionCompleted})
+
+    // API CALL
+    const patchProfile = () =>{
+        console.log('Pressed Submit button')
+        let preJSONBody = {
+          isSubscribed: subscriptionCompleted,
+        }
+        fetch('http://localhost:8000/profiles/:id',{
+          method: 'PATCH',
+          body: JSON.stringify(preJSONBody),
+          headers: {'Content-Type': 'application/json'}
+        })
+        .then(response=>response.json())
+        .then(patchedProfile=> {
+          console.log("Successful patch", patchedProfile)
+          successMessage()
+        })
+        .catch(err=>console.error(err))
+      }
+
     return (
         <div className="container">
             <div className="py-5 text-center">
@@ -84,7 +109,7 @@ function Checkout() {
             </div>
             <div className="row s-box">
                 {/* if payment and subscription has been completed, show the success message */}
-                {paymentCompleted && subscriptionCompleted ? successMessage() : 
+                {paymentCompleted && subscriptionCompleted ? patchProfile() : 
                 // if not, show the cart of artwork/shipping/billing form:
                     <React.Fragment>
                         <div className="col-md-5 order-md-2 mb-4">
