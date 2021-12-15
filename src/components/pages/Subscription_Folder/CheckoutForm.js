@@ -29,6 +29,11 @@ export default function CheckoutForm(props) {
  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
+  const [recipient, setRecipient] = useState('');
+  const [addressLine, setAddressLine] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
  
   const stripe = useStripe();
   const elements = useElements();
@@ -56,6 +61,14 @@ export default function CheckoutForm(props) {
     },
   };
 
+  // pass to mongodb??
+  const shippingAddressObj = {
+    recipient,
+    addressLine,
+    city,
+    postalCode,
+  }
+
   const paymentMethodResult = await stripe.createPaymentMethod(paymentMethodObj);
 
   stripePaymentMethodHandler({
@@ -77,71 +90,119 @@ const handleResponse = response => {
  
   return (
     <React.Fragment>
-      <h4 className="d-flex justify-content-between align-items-center mb-3">
-        <span className="text-muted">Pay with card</span>
-      </h4>
       <form onSubmit={handleSubmit}>
- 
+        <h4 className="d-flex justify-content-between align-items-center mb-3">
+            <span className="text-muted">Shipping information</span>
+        </h4>
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label htmlFor="cc-name">Name on card</label>
+            <label htmlFor="shipping-name">Shipping Recipient</label>
             <input
-              id="cc-name"
+              id="shipping-name"
               type="text"
               className="form-control"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={recipient}
+              onChange={e => setRecipient(e.target.value)}
             />
           </div>
           <div className="col-md-6 mb-3">
-            <label htmlFor="cc-email">Email</label>
+            <label htmlFor="shipping-address">Address</label>
             <input
-              id="cc-email"
+              id="shipping-address"
               type="text"
               className="form-control"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={addressLine}
+              onChange={e => setAddressLine(e.target.value)}
             />
           </div>
         </div>
- 
-        <div className="row">
-          <div className="col-md-12 mb-3">
-            <label htmlFor="cc-number">Card Number</label>
-            <CardNumberElement
-              id="cc-number"
-              className="form-control"
-              options={CARD_ELEMENT_OPTIONS}
-            />
-          </div>
-        </div>
- 
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label htmlFor="expiry">Expiration Date</label>
-            <CardExpiryElement
-              id="expiry"
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              type="text"
               className="form-control"
-              options={CARD_ELEMENT_OPTIONS}
+              value={city}
+              onChange={e => setCity(e.target.value)}
             />
           </div>
           <div className="col-md-6 mb-3">
-            <label htmlFor="cvc">CVC</label>
-            <CardCvcElement
-              id="cvc"
+            <label htmlFor="postalCode">Zipcode</label>
+            <input
+              id="postalCode"
+              type="text"
               className="form-control"
-              options={CARD_ELEMENT_OPTIONS}
+              value={postalCode}
+              onChange={e => setPostalCode(e.target.value)}
             />
           </div>
         </div>
 
+
+        <h4 className="d-flex justify-content-between align-items-center mb-3">
+          <span className="text-muted">Pay with card</span>
+        </h4>
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="cc-name">Name on card</label>
+              <input
+                id="cc-name"
+                type="text"
+                className="form-control"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="cc-email">Email</label>
+              <input
+                id="cc-email"
+                type="text"
+                className="form-control"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
         
- 
-        <hr className="mb-4" />
-        <button className="btn btn-dark w-100" type="submit" disabled={loading}>
-          {loading ? <div className="spinner-border spinner-border-sm text-light" role="status"></div> : `PAY $${props.amount}`}
-        </button>
-        {errorMsg && <div className="text-danger mt-2">{errorMsg}</div>}
+          <div className="row">
+            <div className="col-md-12 mb-3">
+              <label htmlFor="cc-number">Card Number</label>
+              <CardNumberElement
+                id="cc-number"
+                className="form-control"
+                options={CARD_ELEMENT_OPTIONS}
+              />
+            </div>
+          </div>
+  
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="expiry">Expiration Date</label>
+              <CardExpiryElement
+                id="expiry"
+                className="form-control"
+                options={CARD_ELEMENT_OPTIONS}
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="cvc">CVC</label>
+              <CardCvcElement
+                id="cvc"
+                className="form-control"
+                options={CARD_ELEMENT_OPTIONS}
+              />
+            </div>
+          </div>
+
+
+          <hr className="mb-4" />
+          <button className="btn btn-dark w-100" type="submit" disabled={loading}>
+            {loading ? <div className="spinner-border spinner-border-sm text-light" role="status"></div> : `PAY $${props.amount}`}
+          </button>
+          {errorMsg && <div className="text-danger mt-2">{errorMsg}</div>}
       </form>
     </React.Fragment>
   );
