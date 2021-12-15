@@ -85,6 +85,8 @@ const handleResponse = response => {
         return;
     }
     props.setPaymentCompleted(response.success ? true : false);
+    props.setSubscriptionCompleted(response.success ? true : false);
+    //console.log(props.setSubscriptionCompleted)
 };
   return (
     <React.Fragment>
