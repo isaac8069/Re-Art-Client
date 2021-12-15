@@ -1,96 +1,50 @@
-import React, { useState } from 'react';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
- 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
+import React from 'react';
+import { Route, useNavigate } from 'react-router-dom'
+import Checkout from './Checkout';
+import SignIn from '../../auth/SignIn'
+import messages from '../../shared/AutoDismissAlert/messages'
 
-//message to appear if card payment is successful
-const successMessage = () => {
-  return (
-    <div className="success-msg">
-      <svg width="100px" height="100px" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-      </svg>
-      <div className="title">Payment Successful</div>
-      <h6>Return to Profile</h6>
-    </div>
-  )
-}
  
-// styled cart of items to show next to payment information
-const cart = () => {
-  return (
-    <React.Fragment>
-       <h4 className="d-flex justify-content-between align-items-center mb-3">
-      <span className="text-muted">Your cart</span>
-      <span className="badge bg-secondary badge-pill">3</span>
-    </h4>
-    <ul className="list-group mb-3">
-      <li className="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 className="my-0">First artwork</h6>
-          <small className="text-muted">Brief description</small>
-        </div>
-        <span className="text-muted">$200</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 className="my-0">Second artwork</h6>
-          <small className="text-muted">Brief description</small>
-        </div>
-        <span className="text-muted">$200</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 className="my-0">Third artwork</h6>
-          <small className="text-muted">Brief description</small>
-        </div>
-        <span className="text-muted">$200</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between bg-light">
-        <div className="text-success">
-          <h6 className="my-0">Promo code</h6>
-          <small>NEWYEAR2022</small>
-        </div>
-        <span className="text-success">-$25</span>
-      </li>
-      <li className="list-group-item d-flex justify-content-between">
-        <span>Total (USD)</span>
-        <strong>$575</strong>
-      </li>
-    </ul>
-    </React.Fragment>
-  )
-}
+
+// function that renders Subscription Page
+function Subscription(props) {
+  // uses hook that allows navigation
+  const navigate = useNavigate();
+
+ // handels when user trys to sign up for subscription
+ // tests if user is populated
+ // if populated will go onto next test for profile
+ // if passes all tests will enter checkout page
+  const handleClick = (e) =>{
+    if(props.user === null){
+      props.msgAlert({
+        heading: 'Please Sign in',
+        message: messages.signUpSubsubscription,
+        variant: 'danger',
+      })
+      return(
+        navigate('/sign-in')
+      )
+    } else{
+      return (navigate('/subscription/checkout'))
+  }
+  }
  
-// checkout page structure
-function Subscription() {
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
- 
+  // renders page with description of subscription 
+  // also has button that triggers test if sign in is true as well as profile created
   return (
     <div className="container">
-      <div className="py-5 text-center">
-        <h4>Stripe Test</h4>
-      </div>
- 
-      <div className="row s-box">
-        {paymentCompleted ? successMessage() : 
-        <React.Fragment>
-          <div className="col-md-5 order-md-2 mb-4">
-            {cart()}
-          </div>
-          <div className="col-md-7 order-md-1">
-            <Elements stripe={stripePromise}>
-              <CheckoutForm amount={575} setPaymentCompleted={setPaymentCompleted} />
-            </Elements>
-          </div>
-        </React.Fragment>}
-      </div>
- 
+        <h2>Subscription</h2>
+        
+        <div>
+          <h4>
+            12 month Plan
+          </h4>
+          <p>This subscription will have new art sent to your door every 3 months for a full year.</p>
+          <button onClick={handleClick}>Click Here to sign up</button>
+        </div>
     </div>
+ 
   );
 }
  

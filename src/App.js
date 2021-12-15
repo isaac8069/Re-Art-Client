@@ -1,6 +1,6 @@
 // import React, { Component, Fragment } from 'react'
 import React, { useState, Fragment } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
@@ -15,16 +15,17 @@ import ChangePassword from './components/auth/ChangePassword'
 import Profile from './components/pages/Profile_Folder/Profile'
 import Art from './components/pages/Art_Folder/Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
+import Checkout from './components/pages/Subscription_Folder/Checkout'
 
 const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
+	// console.log('user in app', user)
+	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
-		console.log('clear user ran')
+		// console.log('clear user ran')
 		setUser(null)
 	}
 
@@ -85,6 +86,10 @@ const App = () => {
 				<Route
 					path='/subscription'
 					element={<Subscription msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/subscription/checkout'
+					element={<Checkout msgAlert={msgAlert} user={user} />}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
