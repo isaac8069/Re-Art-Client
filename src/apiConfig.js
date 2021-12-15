@@ -11,6 +11,7 @@ if (window.location.hostname === 'localhost') {
 	apiUrl = apiUrls.production
 }
 
+// create local host variable for stripe api interaction
 const API_ENDPOINT = apiUrls.development
 export const stripePaymentMethodHandler = async (data, cb) => {
 	const { amount, result } = data;
