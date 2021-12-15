@@ -6,4 +6,5 @@ export default {
 	signOutSuccess: 'Come back soon!',
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
+	signUpSubsubscription:"Must sign in and have a live profile to order subscription"
 }
