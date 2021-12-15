@@ -18,7 +18,15 @@ const CreateProfile = (props) => {
     setNewProfile({...newProfile, [e.target.name]:e.target.value})
   }
   const handleCheck = e => {
+    if(e.target.checked){
     setNewProfile({...newProfile, tags:[...newProfile.tags, e.target.id]})
+    }
+    else{
+      let bufferTags = newProfile.tags
+      let index = newProfile.tags.indexOf(e.target.id)
+      bufferTags.splice(index, 1)
+      setNewProfile({...newProfile, tags:bufferTags})
+    }
   }
 
   useEffect(() => {//Delete after form works

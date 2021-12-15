@@ -15,6 +15,7 @@ function Subscription(props) {
  // tests if user is populated
  // if populated will go onto next test for profile
  // if passes all tests will enter checkout page
+ 
   const handleClick = (e) =>{
     if(props.user === null){
       props.msgAlert({
