@@ -1,4 +1,10 @@
 import Tag from "../../Tag"
+import CarouselImage from "../../homeComponents/Carousel"
+import Cards from "../../homeComponents/Cards"
+import PlansSection from "../../homeComponents/Plans"
+import Community from "../../homeComponents/Community"
+
+
 
 const Home = (props) => {
 	// const { msgAlert, user } = props
@@ -6,9 +12,21 @@ const Home = (props) => {
 
 	return (
 		<>
-			<h2>Home Page</h2>
 			<div>
-				<Tag />
+				<CarouselImage />
+			</div>
+			<div>
+				<Cards />
+			</div>
+			<div>
+				<PlansSection />
+			</div>
+			<div>
+				<h1 className="text-center">From Our Community</h1>
+				<Community />
+			</div>
+			<div>
+				{/* <Tag /> */}
 			</div>
 		</>
 	)
