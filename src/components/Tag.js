@@ -54,7 +54,7 @@ const postTags = (e) => {
 return (
     <form onSubmit={postTags}>
         <div>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Tag Name</label>
             <input type="checkbox" name="name" id="name" onChange={handleCheck} value={tags ? 'checked' : ''} />
         </div>
         <input type="submit" value="Submit" />
