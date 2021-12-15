@@ -55,6 +55,7 @@ export default function CheckoutForm(props) {
       email
     },
   };
+
   const paymentMethodResult = await stripe.createPaymentMethod(paymentMethodObj);
 
   stripePaymentMethodHandler({
@@ -133,6 +134,8 @@ const handleResponse = response => {
             />
           </div>
         </div>
+
+        
  
         <hr className="mb-4" />
         <button className="btn btn-dark w-100" type="submit" disabled={loading}>
