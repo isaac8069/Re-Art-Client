@@ -10,7 +10,6 @@ import Button from 'react-bootstrap/Button'
 const SignIn = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
     const navigate = useNavigate()
 
 	// handleChange = (event) =>
@@ -20,7 +19,6 @@ const SignIn = (props) => {
 
 	const onSignIn = (event) => {
 		event.preventDefault()
-        // console.log('the props', props)
 		const { msgAlert, setUser } = props
 
         const credentials = {email, password}
