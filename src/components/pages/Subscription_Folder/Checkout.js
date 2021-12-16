@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
+import Profile from '../Profile_Folder/Profile';
  
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
 
+
 //message to appear if card payment is successful
 const successMessage = () => {
+    
     return (
         <div className="success-msg">
             <svg width="100px" height="100px" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,17 +71,54 @@ const cart = () => {
 }
  
 // checkout component structure for route render
-function Checkout() {
+function Checkout(props) {
     // boolean for testing successful payment
     const [paymentCompleted, setPaymentCompleted] = useState(false);
+    // boolean for changing isSubscribed based on form response
+    const [subscriptionCompleted, setSubscriptionCompleted] = useState(false)
+    // boolean for communication with database isSubscribed
+    // const [newSubscription, setNewSubscription] = useState()
+
     // return success message or CheckoutForm component
+    console.log("subscriptionCompleted: ", subscriptionCompleted)
+
+    // useEffect(() => {
+    //     patchProfile()
+    // }, [subscriptionCompleted])
+
+    // API CALL
+    const patchProfile = () =>{
+        successMessage()
+        console.log('Pressed Submit button')
+        let preJSONBody = {
+                isSubscribed: subscriptionCompleted,
+        }
+        const requestOptions = {
+            method: 'PATCH',
+            body: JSON.stringify(preJSONBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.user.token}`
+              },
+        }
+        fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+            .then(response=>response.json())
+            .then(patchedProfile=> {
+                // console.log("subscription saved", patchedProfile)
+                return patchedProfile
+            })
+            .catch(err=>console.error(err))
+      }
+
+    subscriptionCompleted ? patchProfile() : console.log("subscription not saved")
+
     return (
         <div className="container">
             <div className="py-5 text-center">
                 <h4>Checkout</h4>
             </div>
             <div className="row s-box">
-                {/* if payment has been completed, show the success message */}
+                {/* if payment and subscription has been completed, show the success message */}
                 {paymentCompleted ? successMessage() : 
                 // if not, show the cart of artwork/shipping/billing form:
                     <React.Fragment>
@@ -89,7 +129,7 @@ function Checkout() {
                         <div className="col-md-7 order-md-1">
                             <Elements stripe={stripePromise}>
                                 {/* pass bill amount and setpaymentcompleted boolean down to CheckoutForm */}
-                                <CheckoutForm amount={575} setPaymentCompleted={setPaymentCompleted} />
+                                <CheckoutForm amount={575} setPaymentCompleted={setPaymentCompleted} setSubscriptionCompleted={setSubscriptionCompleted} />
                             </Elements>
                         </div>
                     </React.Fragment>
