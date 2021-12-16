@@ -1,5 +1,5 @@
 // import React, { Component, Fragment } from 'react'
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
@@ -23,6 +23,11 @@ const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
+	const [foundProfile, setFoundProfile] = useState({})
+
+	useEffect(() => {
+        getProfile()
+    },[msgAlerts])
 
 	// console.log('user in app', user)
 	// console.log('message alerts', msgAlerts)
@@ -45,6 +50,18 @@ const App = () => {
 			)
 		})
 	}
+
+	const getProfile = () => {
+		if(user){
+			fetch(`http://localhost:8000/profiles/user/${user._id}`)
+			.then(res => res.json())
+			.then(foundObject => {
+				setFoundProfile(foundObject.profile[0])
+			})
+			.catch(err => console.log('THIS IS ERR',err))
+		}
+		console.log('This is profile', foundProfile)
+    }
 
 	return (
 		<Fragment>
@@ -78,7 +95,9 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} user={user} />
+							<Profile msgAlert={msgAlert} 
+								profile={foundProfile}
+								user={user} />
 						</RequireAuth>}
 				/>
 				<Route
@@ -95,7 +114,10 @@ const App = () => {
 				/>
 				<Route
 					path='/profile/edit'
-					element={<EditProfile msgAlert={msgAlert} user={user} />}
+					element={<EditProfile msgAlert={msgAlert} 
+									profile={foundProfile}
+									user={user} />
+							}
 				/>
 			</Routes>
 			<Footer />

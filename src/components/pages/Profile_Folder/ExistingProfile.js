@@ -24,13 +24,14 @@ const ExistingProfile = (props) => {
 
     const editProfile = () => {
       console.log('Edit Profile Pressed')
-      return navigate('/profile/edit', {profile: props.profile})
+      return navigate('/profile/edit')
     }
 
   return (
     <div>
       <h1>My Profile</h1>
-      <h3>{props.profile.name}</h3>
+      <h3>Name: {props.profile.name}</h3>
+      <h3>Addres: {props.profile.address}</h3>
       <h4>List of my Favorites</h4>
       <ul>{tagsArray}</ul>
       <p>{subscription}</p>
