@@ -46,7 +46,6 @@ function Subscription(props) {
   return (
     <div className="container">
         <h2>Subscription</h2>
-        
         <div>
           <h4>
             12 month Plan
@@ -55,7 +54,6 @@ function Subscription(props) {
           <button onClick={handleClick}>Click Here to sign up</button>
         </div>
     </div>
- 
   );
 }
  

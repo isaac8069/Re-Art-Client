@@ -43,12 +43,11 @@ const CreateProfile = (props) => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
       .then(foundTags => {
-          console.log('Found Tags by INDEX', foundTags.tags)
+          // console.log('Found Tags by INDEX', foundTags.tags)
           setTags(foundTags.tags)
       })
       .catch(err => console.log(err))
   }
-
 
   const postProfile = (e) =>{
     e.preventDefault()
