@@ -98,7 +98,6 @@ const App = () => {
 					element={<EditProfile msgAlert={msgAlert} user={user} />}
 				/>
 			</Routes>
-			<Footer />
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
 					key={msgAlert.id}
