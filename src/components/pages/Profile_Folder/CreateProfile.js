@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 import Tag from '../../Tag'
+import messages from '../../shared/AutoDismissAlert/messages'
 
 const CreateProfile = (props) => {
 
@@ -66,6 +67,11 @@ const CreateProfile = (props) => {
     })
     .then(response=>response.json())
     .then(postedBounty=> {
+      props.msgAlert({
+        heading: 'Created Profile',
+        message: messages.profileCreationSuccessful,
+        variant: 'success',
+      })
       navigate('/')
     })
     .catch(err=>console.error(err))

@@ -23,9 +23,11 @@ const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
-	const [profile, setProfile] = useState({})
-	// const [afterSignInTargetUrl, setAfterSignInTargetUrl] = useState('/')
-	// const [afterSignUpTargetUrl, setAfterSignUpTargetUrl] = useState('/')
+	const [foundProfile, setFoundProfile] = useState({})
+
+	useEffect(() => {
+        getProfile()
+    },[msgAlerts])
 
 	// console.log('user in App', user)
 	// console.log('message alerts', msgAlerts)
@@ -49,21 +51,17 @@ const App = () => {
 		})
 	}
 
-	useEffect(() => {
-		getProfile()
-}, [user])
-
-const getProfile = () => {
-	if(user){
-		fetch(`http://localhost:8000/profiles/user/${user._id}`)
-		.then(res => res.json())
-		.then(foundObject => {
-				setProfile(foundObject.profile[0])
-		})
-		.catch(err => console.log('THIS IS ERR',err))
-	}
-	console.log('THIS IS PROFILE: ',profile)
-}
+	const getProfile = () => {
+		if(user){
+			fetch(`http://localhost:8000/profiles/user/${user._id}`)
+			.then(res => res.json())
+			.then(foundObject => {
+				setFoundProfile(foundObject.profile[0])
+			})
+			.catch(err => console.log('THIS IS ERR',err))
+		}
+		console.log('This is profile', foundProfile)
+    }
 
 	return (
 		<Fragment>
@@ -97,7 +95,9 @@ const getProfile = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile profile={profile} setProfile={setProfile} msgAlert={msgAlert} user={user} />
+							<Profile msgAlert={msgAlert} 
+								profile={foundProfile}
+								user={user} />
 						</RequireAuth>}
 				/>
 				<Route
@@ -114,7 +114,10 @@ const getProfile = () => {
 				/>
 				<Route
 					path='/profile/edit'
-					element={<EditProfile msgAlert={msgAlert} user={user} />}
+					element={<EditProfile msgAlert={msgAlert} 
+									profile={foundProfile}
+									user={user} />
+							}
 				/>
 			</Routes>
 			<Footer />
