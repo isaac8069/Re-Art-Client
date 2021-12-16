@@ -9,8 +9,8 @@ const EditProfile = (props) => {
     const navigate = useNavigate();
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
-  const [tags, setTags] = useState([props.profile.tags])
-  const 
+  const [tags, setTags] = useState([])
+  const [tagNames, setTagNames] = useState(props.profile.tags.map((e)=>e.name))
 
   useEffect(() => {
     getTags()
@@ -19,20 +19,24 @@ const EditProfile = (props) => {
   const handleChange = e => {
     setCurrentProfile({...currentProfile, [e.target.name]:e.target.value})
   }
+
   const handleCheck = e => {
     if(e.target.checked){
-    setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, e.target.id]})
+    setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, { _id: e.target.id, name: e.target.name}]})
+    setTagNames([...tagNames, e.target.name])
     }
     else{
       let bufferTags = currentProfile.tags
-      let index = currentProfile.tags.indexOf(e.target.id)
+      let index = tagNames.indexOf(e.target.name)
       bufferTags.splice(index, 1)
       setCurrentProfile({...currentProfile, tags:bufferTags})
+      setTagNames(currentProfile.tags.map((e)=>e.name))
     }
   }
 
   useEffect(() => {//Delete after form works
     console.log('CurrentProfile:\n',currentProfile)
+    console.log('This is tagNames', tagNames)
   }, [currentProfile])
 
   const getTags = () => {
@@ -44,7 +48,6 @@ const EditProfile = (props) => {
       })
       .catch(err => console.log(err))
   }
-
 
   const patchProfile = (e) =>{
     e.preventDefault()
@@ -83,11 +86,11 @@ const EditProfile = (props) => {
           <form onSubmit={patchProfile}>
             <div>
               <label htmlFor="name">Name:</label>
-              <input required onChange={handleChange} type="text" name="name"  id="name"/>
+              <input  onChange={handleChange} type="text" name="name"  id="name"/>
             </div>
             <div>
               <label htmlFor="address">Address:</label>
-              <input required onChange={handleChange} type="text" name="address" id="address"/>
+              <input onChange={handleChange} type="text" name="address" id="address"/>
             </div>
             <div>
               <h2>Favorite Categories</h2>
@@ -95,7 +98,7 @@ const EditProfile = (props) => {
                 tags.map(tag => (
                   <li>
                     <label htmlFor={tag.name}>{tag.name}</label>
-                    <input onChange={handleCheck} type="checkbox" checked={props.profile.tags.includes(tag.name) ? false : true} name={tag.name} id={tag._id} />
+                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
                   </li>
                 ))
               }

@@ -111,7 +111,9 @@ const App = () => {
 				/>
 				<Route
 					path='/subscription/checkout'
-					element={<Checkout msgAlert={msgAlert} user={user} />}
+					element={<Checkout msgAlert={msgAlert}
+									getProfile={getProfile}
+									user={user} />}
 				/>
 				<Route
 					path='/profile/edit'
