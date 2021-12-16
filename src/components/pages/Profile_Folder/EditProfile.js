@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 import Tag from '../../Tag'
+import messages from '../../shared/AutoDismissAlert/messages'
 
 const EditProfile = (props) => {
 
@@ -9,6 +10,7 @@ const EditProfile = (props) => {
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
+  const [tagNames, setTagNames] = useState(props.profile.tags.map((e)=>e.name))
 
   useEffect(() => {
     getTags()
@@ -17,20 +19,24 @@ const EditProfile = (props) => {
   const handleChange = e => {
     setCurrentProfile({...currentProfile, [e.target.name]:e.target.value})
   }
+
   const handleCheck = e => {
     if(e.target.checked){
-    setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, e.target.id]})
+    setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, { _id: e.target.id, name: e.target.name}]})
+    setTagNames([...tagNames, e.target.name])
     }
     else{
       let bufferTags = currentProfile.tags
-      let index = currentProfile.tags.indexOf(e.target.id)
+      let index = tagNames.indexOf(e.target.name)
       bufferTags.splice(index, 1)
       setCurrentProfile({...currentProfile, tags:bufferTags})
+      setTagNames(currentProfile.tags.map((e)=>e.name))
     }
   }
 
   useEffect(() => {//Delete after form works
     console.log('CurrentProfile:\n',currentProfile)
+    console.log('This is tagNames', tagNames)
   }, [currentProfile])
 
   const getTags = () => {
@@ -43,8 +49,7 @@ const EditProfile = (props) => {
       .catch(err => console.log(err))
   }
 
-
-  const postProfile = (e) =>{
+  const patchProfile = (e) =>{
     e.preventDefault()
     console.log('Pressed Submit button')
     let preJSONBody = {
@@ -54,14 +59,22 @@ const EditProfile = (props) => {
       isSubscribed: currentProfile.isSubscribed,
       userId: currentProfile.userId
     }
-    fetch(`http://localhost:8000/profiles/user/${props.user._id}`,{
-      method: 'PATCH',
-      body: JSON.stringify(preJSONBody),
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(response=>response.json())
-    .then(postedProfile=> {
-      navigate('/profile')
+    const requestOptions = {
+        method: 'PATCH',
+        body: JSON.stringify(preJSONBody),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${props.user.token}`
+          },
+    }
+    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+    .then(patchedProfile=> {
+        props.msgAlert({
+            heading: 'Edited Profile',
+            message: messages.editProfileSuccess,
+            variant: 'success',
+          })
+      navigate('/')
     })
     .catch(err=>console.error(err))
   }
@@ -70,14 +83,14 @@ const EditProfile = (props) => {
     return (
         <div>
           <h1>Edit a Profile</h1>
-          <form onSubmit={postProfile}>
+          <form onSubmit={patchProfile}>
             <div>
               <label htmlFor="name">Name:</label>
-              <input required onChange={handleChange} type="text" name="name" value={props.profile.name} id="name"/>
+              <input  onChange={handleChange} type="text" name="name"  id="name"/>
             </div>
             <div>
               <label htmlFor="address">Address:</label>
-              <input required onChange={handleChange} type="text" value={props.profile.address} name="address" id="address"/>
+              <input onChange={handleChange} type="text" name="address" id="address"/>
             </div>
             <div>
               <h2>Favorite Categories</h2>
@@ -85,7 +98,7 @@ const EditProfile = (props) => {
                 tags.map(tag => (
                   <li>
                     <label htmlFor={tag.name}>{tag.name}</label>
-                    <input onChange={handleCheck} type="checkbox" name={tag.name} id={tag._id} />
+                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
                   </li>
                 ))
               }

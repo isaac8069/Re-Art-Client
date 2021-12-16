@@ -106,11 +106,14 @@ const App = () => {
 				/>
 				<Route
 					path='/subscription'
-					element={<Subscription msgAlert={msgAlert} user={user} />}
+					element={<Subscription msgAlert={msgAlert} 
+						user={user} />}
 				/>
 				<Route
 					path='/subscription/checkout'
-					element={<Checkout msgAlert={msgAlert} user={user} />}
+					element={<Checkout msgAlert={msgAlert}
+									getProfile={getProfile}
+									user={user} />}
 				/>
 				<Route
 					path='/profile/edit'
