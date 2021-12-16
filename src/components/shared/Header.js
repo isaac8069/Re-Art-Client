@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+import logo from "./../homeComponents/images/logo.png"
 
 
 const linkStyle = {
@@ -32,7 +33,7 @@ const authenticatedOptions = (
 		</Nav.Link>
 		<Nav.Link>
 			<Link to='subscription' style={linkStyle}>
-				Subscription Plans
+				Plans
 			</Link>
 		</Nav.Link>
 	</>
@@ -69,8 +70,8 @@ const unauthenticatedOptions = (
 const alwaysOptions = (
 	<>
 		<Nav.Link>
-			<Link to='/' style={linkStyle}>
-				Home
+			<Link to='/about' style={linkStyle}>
+				About
 			</Link>
 		</Nav.Link>
 	</>
@@ -79,16 +80,16 @@ const alwaysOptions = (
 const Header = ({ user }) => (
 	<Navbar bg='dark' variant='dark' expand='md'>
 		<Navbar.Brand>
-			<Link to='/' style={linkStyle}>
-				Re-Art
+			<Link to='/'  style={linkStyle}>
+			<img src={logo} alt="Re-Art logo" width="300" height="100"></img>
 			</Link>
 		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
-				{user && (
+				{/* {user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
-				)}
+				)} */}
 				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
