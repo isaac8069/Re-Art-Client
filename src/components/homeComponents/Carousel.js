@@ -4,6 +4,7 @@ import Image1 from "./../homeComponents/images/car1.jpeg"
 import Image2 from "./../homeComponents/images/new2.jpeg"
 import Image3 from "./../homeComponents/images/car2.jpeg"
 
+
 const carstyle = {
   height: '30rem'
 }

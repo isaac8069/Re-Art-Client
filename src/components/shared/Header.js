@@ -2,9 +2,11 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+
+
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'none'
+	color: 'white',
+	textDecoration: 'none'
 }
 const authenticatedOptions = (
 	<>
@@ -24,40 +26,42 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
-		    <Link to='available_art' style={linkStyle}>
+			<Link to='available_art' style={linkStyle}>
 				Art
 			</Link>
-        </Nav.Link>
+		</Nav.Link>
 		<Nav.Link>
-		    <Link to='subscription' style={linkStyle}>
+			<Link to='subscription' style={linkStyle}>
 				Subscription Plans
 			</Link>
-        </Nav.Link>
+		</Nav.Link>
 	</>
 )
 
 const unauthenticatedOptions = (
 	<>
-        <Nav.Link>
-		    <Link to='sign-up' style={linkStyle}>
-				Sign Up
-			</Link>
-        </Nav.Link>
-        <Nav.Link>
-		    <Link to='sign-in' style={linkStyle}>
-				Sign In
-			</Link>
-        </Nav.Link>
-		<Nav.Link>
-		    <Link to='available_art' style={linkStyle}>
-				Art
-			</Link>
-        </Nav.Link>
-		<Nav.Link>
-		    <Link to='subscription' style={linkStyle}>
-				Subscription Plans
-			</Link>
-        </Nav.Link>
+		<Nav className="justify-content-end">
+			<Nav.Link>
+				<Link to='sign-up' style={linkStyle}>
+					Register
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='sign-in' style={linkStyle}>
+					Sign In
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='available_art' style={linkStyle}>
+					Art
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='subscription' style={linkStyle}>
+					Plans
+				</Link>
+			</Nav.Link>
+		</Nav>
 	</>
 )
 
@@ -73,12 +77,12 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-	<Navbar bg='primary' variant='dark' expand='md'>
+	<Navbar bg='dark' variant='dark' expand='md'>
 		<Navbar.Brand>
-            <Link to='/' style={linkStyle}>
-                react-auth-template
-            </Link>
-        </Navbar.Brand>
+			<Link to='/' style={linkStyle}>
+				Re-Art
+			</Link>
+		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
