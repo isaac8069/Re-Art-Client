@@ -50,8 +50,11 @@ const CreateProfile = (props) => {
   }
 
   const postProfile = (e) =>{
+    // Get 2 pieces to put in their cart
+    // fetch('http://localhost:8000/pieces')
+
     e.preventDefault()
-    console.log('Pressed Submit button')
+    // console.log('Pressed Submit button')
     let preJSONBody = {
       name: newProfile.name,
       address: newProfile.address,

@@ -50,58 +50,58 @@ function Subscription(props) {
   // also has button that triggers test if sign in is true as well as profile created
   return (
     <div className="container">
-        <h2>Pick a Plan</h2>
-        <h4>Become a member to access a forever-rotating curated collection of art. No commitments. Pause or cancel anytime.</h4>
-        <div>
-<Row>
-        <Card style={{ width: '18rem' }}>
-  <Card.Body>
-    <Card.Text>
-        Up to
-        <br></br><b>2</b> pieces per season
-    </Card.Text>
-    <div>
-    <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
-    </div>
-    <Card.Text>
-    1 shipment/season <br></br><b>Basic access</b><br></br>
-    $89 trial season. $109/season after
-    </Card.Text>
-    
-  </Card.Body>
-</Card>
-<br />
+      <h2>Pick a Plan</h2>
+      <h4>Become a member to access a forever-rotating curated collection of art. No commitments. Pause or cancel anytime.</h4>
+      <div>
+        <Row>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Text>
+                  Up to
+                  <br></br><b>2</b> pieces per season
+              </Card.Text>
+              <div>
+              <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
+              </div>
+              <Card.Text>
+              1 shipment/season <br></br><b>Basic access</b><br></br>
+              $89 trial season. $109/season after
+              </Card.Text>
+              
+            </Card.Body>
+          </Card>
+          <br />
 
-<Card style={{ width: '18rem' }}>
-  <Card.Body>
-    <Card.Text>
-    Up to
-        <br></br><b>4</b> pieces per season
-    </Card.Text>
-    <Button variant="dark" style={button}>Go somewhere</Button>
-    <Card.Text>
-    2 shipment/season <br></br><b>Value access</b><br></br>
-    $129 trial season. $149/season after
-    </Card.Text>
-  </Card.Body>
-</Card>
-<br />
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Text>
+              Up to
+                  <br></br><b>4</b> pieces per season
+              </Card.Text>
+              <Button variant="dark" style={button}>Go somewhere</Button>
+              <Card.Text>
+              2 shipment/season <br></br><b>Value access</b><br></br>
+              $129 trial season. $149/season after
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <br />
 
-<Card style={{ width: '18rem' }}>
-  <Card.Body>
-    <Card.Text>
-    Up to
-        <br></br><b>6</b> pieces per season
-    </Card.Text>
-    <Button variant="dark" style={button}>Go somewhere</Button>
-    <Card.Text>
-    3 shipment/season <br></br><b>Premium access</b><br></br>
-    $169 trial season. $189/season after
-    </Card.Text>
-  </Card.Body>
-</Card>
-</Row>
-</div>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Text>
+              Up to
+                  <br></br><b>6</b> pieces per season
+              </Card.Text>
+              <Button variant="dark" style={button}>Go somewhere</Button>
+              <Card.Text>
+              3 shipment/season <br></br><b>Premium access</b><br></br>
+              $169 trial season. $189/season after
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Row>
+      </div>
 
 
 

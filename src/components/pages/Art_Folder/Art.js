@@ -30,7 +30,6 @@ const Art = (props) => {
 
     return (
         <div>
-            This is art page
             {pieces}
         </div>
     )
