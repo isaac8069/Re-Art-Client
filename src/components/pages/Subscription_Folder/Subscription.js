@@ -15,6 +15,7 @@ function Subscription(props) {
  // if passes all tests will enter checkout page
 
   const handleClick = (e) =>{
+    // Check for signed in
     if(props.user === null){
       props.msgAlert({
         heading: 'Please Sign in',
@@ -26,7 +27,17 @@ function Subscription(props) {
       // props.setAfterSignInTargetUrl('/subscription/checkout')
       return navigate('/sign-in')
     } else {
-      return navigate('/subscription/checkout')
+      // Check for profile created
+      if(props.profile){
+        return navigate('/subscription/checkout')
+      } else {
+        props.msgAlert({
+          heading: 'Please create a profile',
+          message: messages.profileNeededToSubscribe,
+          variant: 'danger',
+        })
+        return navigate('/profile')
+      }
     }
   }
  

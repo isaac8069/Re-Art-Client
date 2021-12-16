@@ -7,5 +7,6 @@ export default {
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	signUpSubsubscription:"Must sign in and have a live profile to order subscription",
-	profileCreationSuccessful: 'Created Profile Successful'
+	profileCreationSuccessful: 'Created Profile Successful',
+	profileNeededToSubscribe: 'Must create a profile before subscribing'
 }

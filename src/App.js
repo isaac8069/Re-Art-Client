@@ -26,8 +26,8 @@ const App = () => {
 	const [foundProfile, setFoundProfile] = useState({})
 
 	useEffect(() => {
-        getProfile()
-    },[msgAlerts])
+			getProfile()
+	},[msgAlerts])
 
 	// console.log('user in App', user)
 	// console.log('message alerts', msgAlerts)
@@ -106,7 +106,7 @@ const App = () => {
 				/>
 				<Route
 					path='/subscription'
-					element={<Subscription msgAlert={msgAlert} user={user} />}
+					element={<Subscription profile={foundProfile} msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/subscription/checkout'
