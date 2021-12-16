@@ -16,6 +16,7 @@ import Profile from './components/pages/Profile_Folder/Profile'
 import Art from './components/pages/Art_Folder/Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
 import Checkout from './components/pages/Subscription_Folder/Checkout'
+import EditProfile from './components/pages/Profile_Folder/EditProfile'
 
 const App = () => {
 
@@ -90,6 +91,10 @@ const App = () => {
 				<Route
 					path='/subscription/checkout'
 					element={<Checkout msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/profile/edit'
+					element={<EditProfile msgAlert={msgAlert} user={user} />}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

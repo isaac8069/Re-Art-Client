@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { render } from 'sass'
+import EditProfile from './EditProfile'
 
 const ExistingProfile = (props) => {
 
     const [tagsArray, setTagsArray] = useState([<li>Loading...</li>])
     const [subscription, setSubscription] = useState('Loading...')
+    const navigate = useNavigate()
 
     useEffect(()=>{
       if(props.profile.tags){
@@ -19,6 +22,11 @@ const ExistingProfile = (props) => {
       }
     }, [props.profile])
 
+    const editProfile = () => {
+      console.log('Edit Profile Pressed')
+      return navigate('/profile/edit', {profile: props.profile})
+    }
+
   return (
     <div>
       <h1>My Profile</h1>
@@ -26,6 +34,9 @@ const ExistingProfile = (props) => {
       <h4>List of my Favorites</h4>
       <ul>{tagsArray}</ul>
       <p>{subscription}</p>
+
+      <button onClick={editProfile}>Edit Profile</button>
+
     </div>
     )
 }
