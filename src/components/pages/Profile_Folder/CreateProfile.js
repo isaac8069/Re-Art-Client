@@ -66,7 +66,7 @@ const CreateProfile = (props) => {
       headers: {'Content-Type': 'application/json'}
     })
     .then(response=>response.json())
-    .then(postedBounty=> {
+    .then(postedProfile=> {
       props.msgAlert({
         heading: 'Created Profile',
         message: messages.profileCreationSuccessful,
