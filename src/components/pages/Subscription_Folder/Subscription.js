@@ -1,10 +1,8 @@
 import React from 'react';
-import { Route, useNavigate } from 'react-router-dom'
-import Checkout from './Checkout';
-import SignIn from '../../auth/SignIn'
+import { useNavigate } from 'react-router-dom'
+// import Checkout from './Checkout';
+// import SignIn from '../../auth/SignIn'
 import messages from '../../shared/AutoDismissAlert/messages'
-
- 
 
 // function that renders Subscription Page
 function Subscription(props) {
@@ -22,12 +20,13 @@ function Subscription(props) {
         message: messages.signUpSubsubscription,
         variant: 'danger',
       })
-      return(
-        navigate('/sign-in')
-      )
-    } else{
-      return (navigate('/subscription/checkout'))
-  }
+      // NEVER GOT FLESHED OUT
+      // Go back to correct screen after sign-in
+      // props.setAfterSignInTargetUrl('/subscription/checkout')
+      return navigate('/sign-in')
+    } else {
+      return navigate('/subscription/checkout')
+    }
   }
  
   // renders page with description of subscription 

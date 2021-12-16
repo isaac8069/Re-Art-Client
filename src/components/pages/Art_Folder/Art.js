@@ -5,7 +5,7 @@ import Pieces from './Pieces'
 const Art = (props) => {
 
     // State that holds all objects from Server
-    const [allArt, setArt] = useState([])
+    const [art, setArt] = useState([])
     // useEffect that access the Server API
     useEffect(() => {
         fetch('http://localhost:8000/pieces')
@@ -17,8 +17,10 @@ const Art = (props) => {
     }, [])
 
     // Maps art state and passes info from object to Pieces component
-    const pieces = allArt.map(a=>{
-        return <Pieces title = {a.title}
+    const pieces = art.map(a=>{
+        return <Pieces
+            key={a._id}
+            title = {a.title}
             artist = {a.artist}
             imgUrl = {a.imgUrl}
             description = {a.description}
@@ -32,8 +34,6 @@ const Art = (props) => {
             {pieces}
         </div>
     )
-
 }
-
 
 export default Art

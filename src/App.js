@@ -1,6 +1,6 @@
 // import React, { Component, Fragment } from 'react'
-import React, { useState, Fragment } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import React, { useState, Fragment, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
@@ -21,8 +21,11 @@ const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
+	const [profile, setProfile] = useState({})
+	// const [afterSignInTargetUrl, setAfterSignInTargetUrl] = useState('/')
+	// const [afterSignUpTargetUrl, setAfterSignUpTargetUrl] = useState('/')
 
-	// console.log('user in app', user)
+	// console.log('user in App', user)
 	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
 		// console.log('clear user ran')
@@ -43,6 +46,22 @@ const App = () => {
 			)
 		})
 	}
+
+	useEffect(() => {
+		getProfile()
+}, [user])
+
+const getProfile = () => {
+	if(user){
+		fetch(`http://localhost:8000/profiles/user/${user._id}`)
+		.then(res => res.json())
+		.then(foundObject => {
+				setProfile(foundObject.profile[0])
+		})
+		.catch(err => console.log('THIS IS ERR',err))
+	}
+	console.log('THIS IS PROFILE: ',profile)
+}
 
 	return (
 		<Fragment>
@@ -76,7 +95,7 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} user={user} />
+							<Profile profile={profile} setProfile={setProfile} msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
 				<Route
