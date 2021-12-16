@@ -91,9 +91,7 @@ function Checkout(props) {
         successMessage()
         console.log('Pressed Submit button')
         let preJSONBody = {
-            "profile": {
                 isSubscribed: subscriptionCompleted,
-            }
         }
         const requestOptions = {
             method: 'PATCH',
