@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
+import Profile from '../Profile_Folder/Profile';
  
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -70,7 +71,7 @@ const cart = () => {
 }
  
 // checkout component structure for route render
-function Checkout() {
+function Checkout(props) {
     // boolean for testing successful payment
     const [paymentCompleted, setPaymentCompleted] = useState(false);
     // boolean for changing isSubscribed based on form response
@@ -79,28 +80,37 @@ function Checkout() {
     // const [newSubscription, setNewSubscription] = useState()
 
     // return success message or CheckoutForm component
-    console.log("this is state subscriptionCompleted", subscriptionCompleted)
-    // console.log("this is state newSubscription", newSubscription)
-    // setNewSubscription({isSubscribed:subscriptionCompleted})
+    console.log("subscriptionCompleted: ", subscriptionCompleted)
+
+    // useEffect(() => {
+    //     patchProfile()
+    // }, [subscriptionCompleted])
 
     // API CALL
     const patchProfile = () =>{
+        successMessage()
         console.log('Pressed Submit button')
         let preJSONBody = {
-          isSubscribed: subscriptionCompleted,
+                isSubscribed: subscriptionCompleted,
         }
-        fetch('http://localhost:8000/profiles/:id',{
-          method: 'PATCH',
-          body: JSON.stringify(preJSONBody),
-          headers: {'Content-Type': 'application/json'}
-        })
-        .then(response=>response.json())
-        .then(patchedProfile=> {
-          console.log("Successful patch", patchedProfile)
-          successMessage()
-        })
-        .catch(err=>console.error(err))
+        const requestOptions = {
+            method: 'PATCH',
+            body: JSON.stringify(preJSONBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.user.token}`
+              },
+        }
+        fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+            .then(response=>response.json())
+            .then(patchedProfile=> {
+                // console.log("subscription saved", patchedProfile)
+                return patchedProfile
+            })
+            .catch(err=>console.error(err))
       }
+
+    subscriptionCompleted ? patchProfile() : console.log("subscription not saved")
 
     return (
         <div className="container">
@@ -109,7 +119,7 @@ function Checkout() {
             </div>
             <div className="row s-box">
                 {/* if payment and subscription has been completed, show the success message */}
-                {paymentCompleted && subscriptionCompleted ? patchProfile() : 
+                {paymentCompleted ? successMessage() : 
                 // if not, show the cart of artwork/shipping/billing form:
                     <React.Fragment>
                         <div className="col-md-5 order-md-2 mb-4">

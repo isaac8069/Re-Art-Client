@@ -17,6 +17,7 @@ import Art from './components/pages/Art_Folder/Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
 import Checkout from './components/pages/Subscription_Folder/Checkout'
 import EditProfile from './components/pages/Profile_Folder/EditProfile'
+import Footer from './components/shared/Footer'
 
 const App = () => {
 
@@ -97,6 +98,7 @@ const App = () => {
 					element={<EditProfile msgAlert={msgAlert} user={user} />}
 				/>
 			</Routes>
+			<Footer />
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
 					key={msgAlert.id}
