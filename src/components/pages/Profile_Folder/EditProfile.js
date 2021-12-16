@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 import Tag from '../../Tag'
+import messages from '../../shared/AutoDismissAlert/messages'
 
 const EditProfile = (props) => {
 
     const navigate = useNavigate();
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([props.profile.tags])
+  const 
 
   useEffect(() => {
     getTags()
@@ -44,7 +46,7 @@ const EditProfile = (props) => {
   }
 
 
-  const postProfile = (e) =>{
+  const patchProfile = (e) =>{
     e.preventDefault()
     console.log('Pressed Submit button')
     let preJSONBody = {
@@ -54,14 +56,22 @@ const EditProfile = (props) => {
       isSubscribed: currentProfile.isSubscribed,
       userId: currentProfile.userId
     }
-    fetch(`http://localhost:8000/profiles/user/${props.user._id}`,{
-      method: 'PATCH',
-      body: JSON.stringify(preJSONBody),
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(response=>response.json())
-    .then(postedProfile=> {
-      navigate('/profile')
+    const requestOptions = {
+        method: 'PATCH',
+        body: JSON.stringify(preJSONBody),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${props.user.token}`
+          },
+    }
+    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+    .then(patchedProfile=> {
+        props.msgAlert({
+            heading: 'Edited Profile',
+            message: messages.editProfileSuccess,
+            variant: 'success',
+          })
+      navigate('/')
     })
     .catch(err=>console.error(err))
   }
@@ -70,14 +80,14 @@ const EditProfile = (props) => {
     return (
         <div>
           <h1>Edit a Profile</h1>
-          <form onSubmit={postProfile}>
+          <form onSubmit={patchProfile}>
             <div>
               <label htmlFor="name">Name:</label>
-              <input required onChange={handleChange} type="text" name="name" value={props.profile.name} id="name"/>
+              <input required onChange={handleChange} type="text" name="name"  id="name"/>
             </div>
             <div>
               <label htmlFor="address">Address:</label>
-              <input required onChange={handleChange} type="text" value={props.profile.address} name="address" id="address"/>
+              <input required onChange={handleChange} type="text" name="address" id="address"/>
             </div>
             <div>
               <h2>Favorite Categories</h2>
@@ -85,7 +95,7 @@ const EditProfile = (props) => {
                 tags.map(tag => (
                   <li>
                     <label htmlFor={tag.name}>{tag.name}</label>
-                    <input onChange={handleCheck} type="checkbox" name={tag.name} id={tag._id} />
+                    <input onChange={handleCheck} type="checkbox" checked={props.profile.tags.includes(tag.name) ? false : true} name={tag.name} id={tag._id} />
                   </li>
                 ))
               }
