@@ -1,14 +1,34 @@
 import Tag from "../../Tag"
+import CarouselImage from "../../homeComponents/Carousel"
+import Cards from "../../homeComponents/Cards"
+import PlansSection from "../../homeComponents/Plans"
+import Community from "../../homeComponents/Community"
 
+const text = {
+	margin: '50px',
+	fontSize: '60px'
+}
 const Home = (props) => {
 	// const { msgAlert, user } = props
 	console.log('props in home', props)
 
 	return (
 		<>
-			<h2>Home Page</h2>
 			<div>
-				<Tag />
+				<CarouselImage />
+			</div>
+			<div>
+				<Cards />
+			</div>
+			<div>
+				<PlansSection />
+			</div>
+			<div>
+				<h1 className="text-center" style={text}>From Our Community</h1>
+				<Community />
+			</div>
+			<div>
+				{/* <Tag /> */}
 			</div>
 		</>
 	)
