@@ -91,7 +91,9 @@ function Checkout(props) {
         successMessage()
         console.log('Pressed Submit button')
         let preJSONBody = {
-          isSubscribed: subscriptionCompleted,
+            "profile": {
+                isSubscribed: subscriptionCompleted,
+            }
         }
         const requestOptions = {
             method: 'PATCH',
@@ -99,12 +101,13 @@ function Checkout(props) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${props.user.token}`
-              }
+              },
         }
         fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
             .then(response=>response.json())
             .then(patchedProfile=> {
-            console.log("subscription saved", patchedProfile)
+                // console.log("subscription saved", patchedProfile)
+                return patchedProfile
             })
             .catch(err=>console.error(err))
       }
