@@ -4,15 +4,18 @@ import { render } from 'sass'
 const ExistingProfile = (props) => {
 
     const [tagsArray, setTagsArray] = useState([<li>Loading...</li>])
+    const [subscription, setSubscription] = useState('Loading...')
 
     useEffect(()=>{
-      console.log(props.profile.tags)
       if(props.profile.tags){
         setTagsArray(props.profile.tags.map((tag)=>{
-          console.log(tag.name)
           return <li>{tag.name}</li>
         }))
-        console.log('This is tagsArray after if stament',tagsArray)
+      }
+      if(props.profile.isSubscribed){
+        setSubscription('Currently Subscribed')
+      }else{
+        setSubscription('Currently Not Subscribed')
       }
     }, [props.profile])
 
@@ -22,6 +25,7 @@ const ExistingProfile = (props) => {
       <h3>{props.profile.name}</h3>
       <h4>List of my Favorites</h4>
       <ul>{tagsArray}</ul>
+      <p>{subscription}</p>
     </div>
     )
 }
