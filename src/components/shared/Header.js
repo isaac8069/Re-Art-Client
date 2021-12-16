@@ -32,7 +32,7 @@ const authenticatedOptions = (
 		</Nav.Link>
 		<Nav.Link>
 			<Link to='subscription' style={linkStyle}>
-				Subscription Plans
+				Plans
 			</Link>
 		</Nav.Link>
 	</>
