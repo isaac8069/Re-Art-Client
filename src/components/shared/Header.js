@@ -32,6 +32,11 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
+			<Link to='filtered_available_art' style={linkStyle}>
+				Filtered Art
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
 			<Link to='subscription' style={linkStyle}>
 				Plans
 			</Link>

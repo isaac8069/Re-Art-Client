@@ -13,7 +13,6 @@ const box = {
   textAlign: 'center',
   margin: '25px'
 }
-
 const icon = {
   margin: '15px'
 }
@@ -29,46 +28,57 @@ function Subscription(props) {
  // if passes all tests will enter checkout page
 
   const handleClick = (e) =>{
+    // Check for signed in
     if(props.user === null){
       props.msgAlert({
         heading: 'Please Sign in',
         message: messages.signUpSubsubscription,
         variant: 'danger',
       })
-      return(
-        navigate('/sign-in')
-      )
-    } else{
-      return (navigate('/subscription/checkout'))
-  }
+      // NEVER GOT FLESHED OUT
+      // Go back to correct screen after sign-in
+      // props.setAfterSignInTargetUrl('/subscription/checkout')
+      return navigate('/sign-in')
+    } else {
+      // Check for profile created
+      if(props.profile){
+        return navigate('/subscription/checkout')
+      } else {
+        props.msgAlert({
+          heading: 'Please create a profile',
+          message: messages.profileNeededToSubscribe,
+          variant: 'danger',
+        })
+        return navigate('/profile')
+      }
+    }
   }
  
   // renders page with description of subscription 
   // also has button that triggers test if sign in is true as well as profile created
   return (
     <div className="container">
-        <h2 style={box}>Pick a Plan</h2>
-        <h5 style={box}>Become a member to access a forever-rotating curated collection of art. No commitments. Pause or cancel anytime.</h5>
-        <div>
-<CardGroup>
-        <Card style={box} border="dark">
-  <Card.Body>
-  <Card.Title>Basic Access</Card.Title>
-    <Card.Text>
-        Up to
-        <br></br><b>2</b> pieces per season
-    </Card.Text>
-    <div>
-    <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
-    </div>
-    <Card.Text>
-    1 shipment per season <br></br>
-    <b>$89</b> trial season <br></br> $109/season after
-    </Card.Text>
-    
-  </Card.Body>
-</Card>
-<br />
+      <h2>Pick a Plan</h2>
+      <h4>Become a member to access a forever-rotating curated collection of art. No commitments. Pause or cancel anytime.</h4>
+      <div>
+        <Row>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Text>
+                  Up to
+                  <br></br><b>2</b> pieces per season
+              </Card.Text>
+              <div>
+              <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
+              </div>
+              <Card.Text>
+              1 shipment/season <br></br><b>Basic access</b><br></br>
+              $89 trial season. $109/season after
+              </Card.Text>
+              
+            </Card.Body>
+          </Card>
+          <br />
 
 <Card style={box} border="dark">
   <Card.Body>
@@ -100,7 +110,7 @@ function Subscription(props) {
     </Card.Text>
   </Card.Body>
 </Card>
-</CardGroup>
+</Row>
 </div>
 
 <div>
@@ -177,7 +187,6 @@ function Subscription(props) {
           {/* <button onClick={handleClick}>Click Here to sign up</button> */}
         
     </div>
- 
   )
 }
  

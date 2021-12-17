@@ -1,6 +1,6 @@
 // import React, { Component, Fragment } from 'react'
 import React, { useState, Fragment, useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
@@ -14,10 +14,10 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Profile from './components/pages/Profile_Folder/Profile'
 import Art from './components/pages/Art_Folder/Art'
+import Filtered_Art from './components/pages/Art_Folder/Filtered_Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
 import Checkout from './components/pages/Subscription_Folder/Checkout'
 import EditProfile from './components/pages/Profile_Folder/EditProfile'
-import Footer from './components/shared/Footer'
 
 const App = () => {
 
@@ -62,7 +62,7 @@ const App = () => {
 			.catch(err => console.log('THIS IS ERR',err))
 		}
 		console.log('This is profile', foundProfile)
-    }
+	}
 
 	const patchProfile = () => {
 		console.log('Pressed Submit button')
@@ -126,6 +126,10 @@ const App = () => {
 				<Route
 					path='/available_art'
 					element={<Art msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/filtered_available_art'
+					element={<Filtered_Art profile={foundProfile} msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/subscription'

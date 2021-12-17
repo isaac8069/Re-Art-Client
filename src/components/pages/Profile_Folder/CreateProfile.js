@@ -91,7 +91,6 @@ const CreateProfile = (props) => {
         message: messages.profileCreationSuccessful,
         variant: 'success',
       })
-      navigate('/')
     })
       .catch(err => console.error(err))
   }
