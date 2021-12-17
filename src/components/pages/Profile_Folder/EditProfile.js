@@ -27,8 +27,6 @@ const EditProfile = (props) => {
   //useNavigate
   const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
   const [tagNames, setTagNames] = useState(props.profile.tags.map((e) => e.name))
@@ -85,12 +83,7 @@ const EditProfile = (props) => {
       .catch(err => console.log(err))
   }
 
-<<<<<<< HEAD
-  // sends currentProfile to api as a patch 
-  const patchProfile = (e) =>{
-=======
   const patchProfile = (e) => {
->>>>>>> upstream/development
     e.preventDefault()
     console.log('Pressed Submit button')
     let preJSONBody = {
@@ -120,38 +113,6 @@ const EditProfile = (props) => {
       .catch(err => console.error(err))
   }
 
-<<<<<<< HEAD
-    console.log(props)
-    return (
-        <div>
-          <h1>Edit a Profile</h1>
-          <form onSubmit={patchProfile}>
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input  onChange={handleChange} type="text" name="name"  id="name"/>
-            </div>
-            <div>
-              <label htmlFor="address">Address:</label>
-              <input onChange={handleChange} type="text" name="address" id="address"/>
-            </div>
-            <div>
-              <label htmlFor="subscrition">Subscribed :</label>
-              <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition"/>
-            </div>
-            <div>
-              <h2>Favorite Categories</h2>
-              {
-                tags.map(tag => (
-                  <li>
-                    <label htmlFor={tag.name}>{tag.name}</label>
-                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
-                  </li>
-                ))
-              }
-            </div>
-            <button type="submit">Submit Profile Edit</button>
-          </form>
-=======
   console.log(props)
   return (
     <div style={body}>
@@ -171,8 +132,11 @@ const EditProfile = (props) => {
             <Form.Label>Address</Form.Label>
             <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
           </Form.Group>
->>>>>>> upstream/development
         </div>
+        <div>
+              <label htmlFor="subscrition">Subscribed :</label>
+              <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition"/>
+            </div>
 
         <div className='container' style={box}>
           <Card style={{ width: '18rem' }}>
