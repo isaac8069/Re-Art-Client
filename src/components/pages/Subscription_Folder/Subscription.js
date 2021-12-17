@@ -110,7 +110,7 @@ function Subscription(props) {
     </Card.Text>
   </Card.Body>
 </Card>
-</CardGroup>
+</Row>
 </div>
 
 <div>

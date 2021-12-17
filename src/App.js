@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Profile from './components/pages/Profile_Folder/Profile'
 import Art from './components/pages/Art_Folder/Art'
+import Filtered_Art from './components/pages/Art_Folder/Filtered_Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
 import Checkout from './components/pages/Subscription_Folder/Checkout'
 import EditProfile from './components/pages/Profile_Folder/EditProfile'
@@ -102,6 +103,10 @@ const App = () => {
 				<Route
 					path='/available_art'
 					element={<Art msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/filtered_available_art'
+					element={<Filtered_Art profile={foundProfile} msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/subscription'
