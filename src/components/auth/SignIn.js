@@ -7,6 +7,20 @@ import messages from '../shared/AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+const box = {
+    textAlign: 'left',
+    margin: '2px',
+    padding: '5px'
+  }
+  
+  const button = {
+    margin: '10px',
+  }
+  
+  const bgc = {
+    backgroundColor: 'lightgrey'
+  }
+
 const SignIn = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -46,12 +60,14 @@ const SignIn = (props) => {
 
     return (
         <div className='row'>
-            <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3>Sign In</h3>
+            <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bgc}>
+                <h5>Sign In</h5>
                 <Form onSubmit={onSignIn}>
+                <div className='container' style={box}>
                     <Form.Group controlId='email'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
+                            style={{ width: '18rem' }}
                             required
                             type='email'
                             name='email'
@@ -60,9 +76,13 @@ const SignIn = (props) => {
                             onChange={e => setEmail(e.target.value)}
                         />
                     </Form.Group>
+                    </div>
+
+                    <div className='container' style={box}>
                     <Form.Group controlId='password'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
+                            style={{ width: '18rem' }}
                             required
                             name='password'
                             value={password}
@@ -71,7 +91,9 @@ const SignIn = (props) => {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
+                    </div>
+
+                    <Button variant='light' type='submit' style={button}>
                         Submit
                     </Button>
                 </Form>
