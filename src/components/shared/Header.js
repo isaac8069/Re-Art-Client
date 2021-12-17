@@ -78,7 +78,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-	<Navbar bg='dark' variant='dark' expand='md'>
+	<Navbar bg='secondary' variant='dark' expand='md'>
 		<Navbar.Brand>
 			<Link to='/'  style={linkStyle}>
 			<img src={logo} alt="Re-Art logo" width="300" height="100"></img>
