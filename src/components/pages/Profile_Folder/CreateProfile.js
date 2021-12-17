@@ -75,22 +75,24 @@ const CreateProfile = (props) => {
       isSubscribed: newProfile.isSubscribed,
       userId: newProfile.userId
     }
-    fetch('http://localhost:8000/profiles', {
+    const requestOptions = {
       method: 'POST',
       body: JSON.stringify(preJSONBody),
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => response.json())
-      .then(postedProfile => {
-        props.msgAlert({
-          heading: 'Created Profile',
-          message: messages.profileCreationSuccessful,
-          variant: 'success',
-        })
-        navigate('/')
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.user.token}`
+      },
+    }
+    fetch('http://localhost:8000/profiles', requestOptions)
+    .then(response=>response.json())
+    .then(postedProfile=> {
+      props.msgAlert({
+        heading: 'Created Profile',
+        message: messages.profileCreationSuccessful,
+        variant: 'success',
       })
       .catch(err => console.error(err))
-  }
+  })}
 
   return (
     <div>
@@ -133,5 +135,6 @@ const CreateProfile = (props) => {
     </div>
   )
 }
+
 
 export default CreateProfile
