@@ -59,11 +59,11 @@ const EditProfile = (props) => {
 
   const handleSubscription = e => {
     console.log('box clicked')
-    if(e.target.checked){
-      setCurrentProfile({...currentProfile, isSubscribed: true})
-      }
-    else{
-      setCurrentProfile({...currentProfile, isSubscribed: false})
+    if (e.target.checked) {
+      setCurrentProfile({ ...currentProfile, isSubscribed: true })
+    }
+    else {
+      setCurrentProfile({ ...currentProfile, isSubscribed: false })
     }
   }
 
@@ -116,48 +116,48 @@ const EditProfile = (props) => {
   console.log(props)
   return (
     <div style={body}>
-    <div className='container' style={bgc}>
-      <h5>Edit Profile</h5>
+      <div className='container' style={bgc}>
+        <h5>Edit Profile</h5>
 
-      <Form onSubmit={patchProfile}>
-        <div className='container' style={box}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
-            <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
-          </Form.Group>
-        </div>
+        <Form onSubmit={patchProfile}>
+          <div className='container' style={box}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Name</Form.Label>
+              <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
+            </Form.Group>
+          </div>
 
-        <div className='container' style={box}>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Address</Form.Label>
-            <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
-          </Form.Group>
-        </div>
-        <div>
-              <label htmlFor="subscrition">Subscribed :</label>
-              <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition"/>
-            </div>
+          <div className='container' style={box}>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Address</Form.Label>
+              <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
+            </Form.Group>
+          </div>
+          <div>
+            <label htmlFor="subscrition">Subscribed :</label>
+            <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition" />
+          </div>
 
-        <div className='container' style={box}>
-          <Card style={{ width: '18rem' }}>
-            <Card.Header>Favorites</Card.Header>
-            {
-              tags.map(tag => (
-                <li>
-                  <label htmlFor={tag.name}>{tag.name}</label>
-                  <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
-                </li>
-              ))
-            }
-          </Card>
-        </div>
+          <div className='container' style={box}>
+            <Card style={{ width: '18rem' }}>
+              <Card.Header>Favorites</Card.Header>
+              {
+                tags.map(tag => (
+                  <li>
+                    <label htmlFor={tag.name}>{tag.name}</label>
+                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
+                  </li>
+                ))
+              }
+            </Card>
+          </div>
 
-        <Button variant="light" type="submit" style={button}>
-          Submit
-        </Button>
-      </Form>
+          <Button variant="light" type="submit" style={button}>
+            Submit
+          </Button>
+        </Form>
 
-    </div>
+      </div>
     </div>
   )
 }

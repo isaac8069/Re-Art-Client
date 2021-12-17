@@ -19,8 +19,8 @@ const bgc = {
   backgroundColor: 'lightgrey'
 }
 
-const body = {
-  // marginTop: '15px',
+const password = {
+  cursor: 'pointer'
 }
 
 
@@ -48,8 +48,13 @@ const ExistingProfile = (props) => {
     return navigate('/profile/edit')
   }
 
+  const changePassword = () => {
+    return navigate('/change-password')
+  }
+  
+
   return (
-    <div style={body}>
+    <div>
     <div className='container' style={bgc}>
       <h5>Profile</h5>
       <div className='container' style={box}>
@@ -58,7 +63,7 @@ const ExistingProfile = (props) => {
           <ListGroup variant="flush">
             <ListGroup.Item style={box}>{props.profile.name}</ListGroup.Item>
             <ListGroup.Item style={box}>{props.profile.address}</ListGroup.Item>
-            <Card.Link style={box} href="../../auth/ChangePassword">Change Password</Card.Link>
+            <Card.Link style={box, password} onClick={changePassword}>Change Password</Card.Link>
           </ListGroup>
         </Card>
       </div>
