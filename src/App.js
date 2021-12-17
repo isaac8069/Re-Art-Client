@@ -1,6 +1,6 @@
 // import React, { Component, Fragment } from 'react'
-import React, { useState, Fragment } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useState, Fragment, useEffect } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
@@ -15,16 +15,24 @@ import ChangePassword from './components/auth/ChangePassword'
 import Profile from './components/pages/Profile_Folder/Profile'
 import Art from './components/pages/Art_Folder/Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
+import Checkout from './components/pages/Subscription_Folder/Checkout'
+import EditProfile from './components/pages/Profile_Folder/EditProfile'
+import Footer from './components/shared/Footer'
 
 const App = () => {
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
+	const [foundProfile, setFoundProfile] = useState({})
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
+	useEffect(() => {
+        getProfile()
+    }, [msgAlerts])
+	
+	// console.log('user in app', user)
+	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
-		console.log('clear user ran')
+		// console.log('clear user ran')
 		setUser(null)
 	}
 
@@ -42,6 +50,41 @@ const App = () => {
 			)
 		})
 	}
+
+	const getProfile = () => {
+		if(user){
+			fetch(`http://localhost:8000/profiles/user/${user._id}`)
+			.then(res => res.json())
+			.then(foundObject => {
+				setFoundProfile(foundObject.profile[0])
+				patchProfile()
+			})
+			.catch(err => console.log('THIS IS ERR',err))
+		}
+		console.log('This is profile', foundProfile)
+    }
+
+	const patchProfile = () => {
+		console.log('Pressed Submit button')
+		let preJSONBody = {
+		  name: foundProfile.name,
+		  address: foundProfile.address,
+		  tags: foundProfile.tags,
+		  isSubscribed: foundProfile.isSubscribed,
+		  userId: foundProfile.userId
+		}
+		const requestOptions = {
+		  method: 'PATCH',
+		  body: JSON.stringify(preJSONBody),
+		  headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		  },
+		}
+		fetch(`http://localhost:8000/profiles/user/${user._id}`, requestOptions)
+		  .then(patchedProfile => patchedProfile)
+		  .catch(err => console.error(err))
+	  }
 
 	return (
 		<Fragment>
@@ -75,7 +118,9 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} user={user} />
+							<Profile msgAlert={msgAlert} 
+								profile={foundProfile}
+								user={user} />
 						</RequireAuth>}
 				/>
 				<Route
@@ -84,7 +129,21 @@ const App = () => {
 				/>
 				<Route
 					path='/subscription'
-					element={<Subscription msgAlert={msgAlert} user={user} />}
+					element={<Subscription msgAlert={msgAlert} 
+						user={user} />}
+				/>
+				<Route
+					path='/subscription/checkout'
+					element={<Checkout msgAlert={msgAlert}
+									getProfile={getProfile}
+									user={user} />}
+				/>
+				<Route
+					path='/profile/edit'
+					element={<EditProfile msgAlert={msgAlert} 
+									profile={foundProfile}
+									user={user} />
+							}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

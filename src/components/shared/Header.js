@@ -2,9 +2,12 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+import logo from "./../homeComponents/images/logo.png"
+
+
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'none'
+	color: 'white',
+	textDecoration: 'none'
 }
 const authenticatedOptions = (
 	<>
@@ -24,40 +27,42 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
-		    <Link to='available_art' style={linkStyle}>
+			<Link to='available_art' style={linkStyle}>
 				Art
 			</Link>
-        </Nav.Link>
+		</Nav.Link>
 		<Nav.Link>
-		    <Link to='subscription' style={linkStyle}>
-				Subscription Plans
+			<Link to='subscription' style={linkStyle}>
+				Plans
 			</Link>
-        </Nav.Link>
+		</Nav.Link>
 	</>
 )
 
 const unauthenticatedOptions = (
 	<>
-        <Nav.Link>
-		    <Link to='sign-up' style={linkStyle}>
-				Sign Up
-			</Link>
-        </Nav.Link>
-        <Nav.Link>
-		    <Link to='sign-in' style={linkStyle}>
-				Sign In
-			</Link>
-        </Nav.Link>
-		<Nav.Link>
-		    <Link to='available_art' style={linkStyle}>
-				Art
-			</Link>
-        </Nav.Link>
-		<Nav.Link>
-		    <Link to='subscription' style={linkStyle}>
-				Subscription Plans
-			</Link>
-        </Nav.Link>
+		<Nav className="justify-content-end">
+			<Nav.Link>
+				<Link to='sign-up' style={linkStyle}>
+					Register
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='sign-in' style={linkStyle}>
+					Sign In
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='available_art' style={linkStyle}>
+					Art
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link to='subscription' style={linkStyle}>
+					Plans
+				</Link>
+			</Nav.Link>
+		</Nav>
 	</>
 )
 
@@ -65,26 +70,26 @@ const unauthenticatedOptions = (
 const alwaysOptions = (
 	<>
 		<Nav.Link>
-			<Link to='/' style={linkStyle}>
-				Home
+			<Link to='/about' style={linkStyle}>
+				About
 			</Link>
 		</Nav.Link>
 	</>
 )
 
 const Header = ({ user }) => (
-	<Navbar bg='primary' variant='dark' expand='md'>
+	<Navbar bg='secondary' variant='dark' expand='md'>
 		<Navbar.Brand>
-            <Link to='/' style={linkStyle}>
-                react-auth-template
-            </Link>
-        </Navbar.Brand>
+			<Link to='/'  style={linkStyle}>
+			<img src={logo} alt="Re-Art logo" width="300" height="100"></img>
+			</Link>
+		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
-				{user && (
+				{/* {user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
-				)}
+				)} */}
 				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
