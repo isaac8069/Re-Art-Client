@@ -57,11 +57,34 @@ const App = () => {
 			.then(res => res.json())
 			.then(foundObject => {
 				setFoundProfile(foundObject.profile[0])
+				patchProfile()
 			})
 			.catch(err => console.log('THIS IS ERR',err))
 		}
 		console.log('This is profile', foundProfile)
     }
+
+	const patchProfile = () => {
+		console.log('Pressed Submit button')
+		let preJSONBody = {
+		  name: foundProfile.name,
+		  address: foundProfile.address,
+		  tags: foundProfile.tags,
+		  isSubscribed: foundProfile.isSubscribed,
+		  userId: foundProfile.userId
+		}
+		const requestOptions = {
+		  method: 'PATCH',
+		  body: JSON.stringify(preJSONBody),
+		  headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		  },
+		}
+		fetch(`http://localhost:8000/profiles/user/${user._id}`, requestOptions)
+		  .then(patchedProfile => patchedProfile)
+		  .catch(err => console.error(err))
+	  }
 
 	return (
 		<Fragment>

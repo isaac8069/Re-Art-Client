@@ -60,11 +60,15 @@ const CreateProfile = (props) => {
       isSubscribed: newProfile.isSubscribed,
       userId: newProfile.userId
     }
-    fetch('http://localhost:8000/profiles',{
+    const requestOptions = {
       method: 'POST',
       body: JSON.stringify(preJSONBody),
-      headers: {'Content-Type': 'application/json'}
-    })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.user.token}`
+      },
+    }
+    fetch('http://localhost:8000/profiles', requestOptions)
     .then(response=>response.json())
     .then(postedProfile=> {
       props.msgAlert({
