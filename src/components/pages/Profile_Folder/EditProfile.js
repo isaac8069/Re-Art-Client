@@ -4,22 +4,28 @@ import { useNavigate } from 'react-router-dom'
 import Tag from '../../Tag'
 import messages from '../../shared/AutoDismissAlert/messages'
 
+// Edit Profile Function
 const EditProfile = (props) => {
+  //useNavigate
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
+  // States for currentProfile, tags, and tagNames
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
   const [tagNames, setTagNames] = useState(props.profile.tags.map((e)=>e.name))
 
+  // call to api when components renders and gets the tags from database
   useEffect(() => {
     getTags()
   }, [])
 
+  // updating inputs to change currentProfile state
   const handleChange = e => {
     setCurrentProfile({...currentProfile, [e.target.name]:e.target.value})
   }
 
+  // updating tags for currentProfile
+  // checks if li item is checked and then runs code to add entire object
   const handleCheck = e => {
     if(e.target.checked){
     setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, { _id: e.target.id, name: e.target.name}]})
@@ -34,11 +40,22 @@ const EditProfile = (props) => {
     }
   }
 
+  const handleSubscription = e => {
+    console.log('box clicked')
+    if(e.target.checked){
+      setCurrentProfile({...currentProfile, isSubscribed: true})
+      }
+    else{
+      setCurrentProfile({...currentProfile, isSubscribed: false})
+    }
+  }
+
   useEffect(() => {//Delete after form works
     console.log('CurrentProfile:\n',currentProfile)
     console.log('This is tagNames', tagNames)
   }, [currentProfile])
 
+  // api call the gets the tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
@@ -49,6 +66,7 @@ const EditProfile = (props) => {
       .catch(err => console.log(err))
   }
 
+  // sends currentProfile to api as a patch 
   const patchProfile = (e) =>{
     e.preventDefault()
     console.log('Pressed Submit button')
@@ -91,6 +109,10 @@ const EditProfile = (props) => {
             <div>
               <label htmlFor="address">Address:</label>
               <input onChange={handleChange} type="text" name="address" id="address"/>
+            </div>
+            <div>
+              <label htmlFor="subscrition">Subscribed :</label>
+              <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition"/>
             </div>
             <div>
               <h2>Favorite Categories</h2>

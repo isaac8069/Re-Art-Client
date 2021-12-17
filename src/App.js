@@ -27,8 +27,8 @@ const App = () => {
 
 	useEffect(() => {
         getProfile()
-    },[msgAlerts])
-
+    }, [msgAlerts])
+	
 	// console.log('user in app', user)
 	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
