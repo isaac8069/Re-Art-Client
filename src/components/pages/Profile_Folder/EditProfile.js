@@ -24,21 +24,25 @@ const body = {
 }
 
 const EditProfile = (props) => {
-
+  //useNavigate
   const navigate = useNavigate();
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
   const [tagNames, setTagNames] = useState(props.profile.tags.map((e) => e.name))
 
+  // call to api when components renders and gets the tags from database
   useEffect(() => {
     getTags()
   }, [])
 
+  // updating inputs to change currentProfile state
   const handleChange = e => {
     setCurrentProfile({ ...currentProfile, [e.target.name]: e.target.value })
   }
 
+  // updating tags for currentProfile
+  // checks if li item is checked and then runs code to add entire object
   const handleCheck = e => {
     if (e.target.checked) {
       setCurrentProfile({ ...currentProfile, tags: [...currentProfile.tags, { _id: e.target.id, name: e.target.name }] })
@@ -53,11 +57,22 @@ const EditProfile = (props) => {
     }
   }
 
+  const handleSubscription = e => {
+    console.log('box clicked')
+    if (e.target.checked) {
+      setCurrentProfile({ ...currentProfile, isSubscribed: true })
+    }
+    else {
+      setCurrentProfile({ ...currentProfile, isSubscribed: false })
+    }
+  }
+
   useEffect(() => {//Delete after form works
     console.log('CurrentProfile:\n', currentProfile)
     console.log('This is tagNames', tagNames)
   }, [currentProfile])
 
+  // api call the gets the tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
@@ -101,44 +116,48 @@ const EditProfile = (props) => {
   console.log(props)
   return (
     <div style={body}>
-    <div className='container' style={bgc}>
-      <h5>Edit Profile</h5>
+      <div className='container' style={bgc}>
+        <h5>Edit Profile</h5>
 
-      <Form onSubmit={patchProfile}>
-        <div className='container' style={box}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
-            <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
-          </Form.Group>
-        </div>
+        <Form onSubmit={patchProfile}>
+          <div className='container' style={box}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Name</Form.Label>
+              <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
+            </Form.Group>
+          </div>
 
-        <div className='container' style={box}>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Address</Form.Label>
-            <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
-          </Form.Group>
-        </div>
+          <div className='container' style={box}>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Address</Form.Label>
+              <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
+            </Form.Group>
+          </div>
+          <div>
+            <label htmlFor="subscrition">Subscribed :</label>
+            <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition" />
+          </div>
 
-        <div className='container' style={box}>
-          <Card style={{ width: '18rem' }}>
-            <Card.Header>Favorites</Card.Header>
-            {
-              tags.map(tag => (
-                <li>
-                  <label htmlFor={tag.name}>{tag.name}</label>
-                  <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
-                </li>
-              ))
-            }
-          </Card>
-        </div>
+          <div className='container' style={box}>
+            <Card style={{ width: '18rem' }}>
+              <Card.Header>Favorites</Card.Header>
+              {
+                tags.map(tag => (
+                  <li>
+                    <label htmlFor={tag.name}>{tag.name}</label>
+                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
+                  </li>
+                ))
+              }
+            </Card>
+          </div>
 
-        <Button variant="light" type="submit" style={button}>
-          Submit
-        </Button>
-      </Form>
+          <Button variant="light" type="submit" style={button}>
+            Submit
+          </Button>
+        </Form>
 
-    </div>
+      </div>
     </div>
   )
 }

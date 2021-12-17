@@ -101,10 +101,9 @@ function Checkout(props) {
               },
         }
         fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
-            .then(response=>response.json())
             .then(patchedProfile=> {
-                // console.log("subscription saved", patchedProfile)
-                return patchedProfile
+                console.log("subscription saved", patchedProfile)
+                props.getProfile()
             })
             .catch(err=>console.error(err))
       }
