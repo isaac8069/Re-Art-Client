@@ -36,7 +36,7 @@ const CreateProfile = (props) => {
   }
 
   useEffect(() => {//Delete after form works
-    console.log('newProfile:\n',newProfile)
+    // console.log('newProfile:\n',newProfile)
   }, [newProfile])
 
   const getTags = () => {
@@ -50,33 +50,37 @@ const CreateProfile = (props) => {
   }
 
   const postProfile = (e) =>{
-    // Get 2 pieces to put in their cart
-    // fetch('http://localhost:8000/pieces')
-
     e.preventDefault()
-    // console.log('Pressed Submit button')
-    let preJSONBody = {
-      name: newProfile.name,
-      address: newProfile.address,
-      tags: newProfile.tags,
-      isSubscribed: newProfile.isSubscribed,
-      userId: newProfile.userId
-    }
-    fetch('http://localhost:8000/profiles',{
-      method: 'POST',
-      body: JSON.stringify(preJSONBody),
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(response=>response.json())
-    .then(postedBounty=> {
-      props.msgAlert({
-        heading: 'Created Profile',
-        message: messages.profileCreationSuccessful,
-        variant: 'success',
+    // Get 2 pieces to put in their cart
+    fetch('http://localhost:8000/pieces')//this will be a new route eventually
+    .then(res => res.json())
+    .then(foundObject => {
+      console.log('foundObject: ',foundObject)
+      
+      let preJSONBody = {
+        name: newProfile.name,
+        address: newProfile.address,
+        tags: newProfile.tags,
+        isSubscribed: newProfile.isSubscribed,
+        userId: newProfile.userId,
+        
+      }
+      fetch('http://localhost:8000/profiles',{
+        method: 'POST',
+        body: JSON.stringify(preJSONBody),
+        headers: {'Content-Type': 'application/json'}
       })
-      navigate('/')
+      .then(response=>response.json())
+      .then(postedBounty=> {
+        props.msgAlert({
+          heading: 'Created Profile',
+          message: messages.profileCreationSuccessful,
+          variant: 'success',
+        })
+        navigate('/')
+      })
+      .catch(err=>console.error(err))
     })
-    .catch(err=>console.error(err))
   }
 
   return (
