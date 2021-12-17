@@ -21,6 +21,7 @@ const icon = {
 function Subscription(props) {
   // uses hook that allows navigation
   const navigate = useNavigate()
+  console.log(props.profile)
 
  // handels when user trys to sign up for subscription
  // tests if user is populated
