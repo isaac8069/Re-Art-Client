@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
@@ -26,11 +26,6 @@ const SignIn = (props) => {
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
-	// handleChange = (event) =>
-	// 	this.setState({
-	// 		[event.target.name]: event.target.value,
-	// 	})
-
 	const onSignIn = (event) => {
 		event.preventDefault()
 		const { msgAlert, setUser } = props
@@ -57,6 +52,16 @@ const SignIn = (props) => {
 				})
 			})
 	}
+
+    //NEVER GOT FLESHED OUT
+    // Once they leave SignIn page for any reason, set the redirect path to default
+    // console.log('afterSignInTargetUrl: ',props.afterSignInTargetUrl)
+    // useEffect(() => {
+    //     // equivalent to componentWillUnmount
+    //     return function cleanup(){
+    //         props.setAfterSignInTargetUrl('/')
+    //     }
+    // })
 
     return (
         <div className='row'>
