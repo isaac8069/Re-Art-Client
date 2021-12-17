@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route, useNavigate } from 'react-router-dom'
 import { Card, CardGroup } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import PlansImage from "./../homeComponents/images/plansImage.jpeg"
@@ -14,8 +15,11 @@ const text = {
 
 const PlansSection = () => {
 
-const routeChange = () =>{
-// This will handle route change to Plans when button Learn More is clicked
+  const navigate = useNavigate()
+const handleClick = (e) =>{
+  return(
+    navigate('/subscription')
+  )
 }
 return (
 <div>
@@ -30,7 +34,7 @@ return (
     <Card.Text>
       With supporting text below as a natural lead-in to additional content.
     </Card.Text>
-    <Button variant="dark" onClick={routeChange}>Learn More</Button>
+    <Button variant="dark" onClick={handleClick}>Learn More</Button>
   </Card.Body>
 </Card>
 </CardGroup> 

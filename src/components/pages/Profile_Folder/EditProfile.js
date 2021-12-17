@@ -1,41 +1,60 @@
 import React, { useState, useEffect } from 'react'
 import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
+import { Form, Button, Card } from 'react-bootstrap'
 import Tag from '../../Tag'
 import messages from '../../shared/AutoDismissAlert/messages'
 
+const box = {
+  textAlign: 'left',
+  margin: '2px',
+  padding: '5px'
+}
+
+const button = {
+  margin: '10px',
+}
+
+const bgc = {
+  backgroundColor: 'lightgrey'
+}
+
+const body = {
+  // marginTop: '10px'
+}
+
 const EditProfile = (props) => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
-  const [tagNames, setTagNames] = useState(props.profile.tags.map((e)=>e.name))
+  const [tagNames, setTagNames] = useState(props.profile.tags.map((e) => e.name))
 
   useEffect(() => {
     getTags()
   }, [])
 
   const handleChange = e => {
-    setCurrentProfile({...currentProfile, [e.target.name]:e.target.value})
+    setCurrentProfile({ ...currentProfile, [e.target.name]: e.target.value })
   }
 
   const handleCheck = e => {
-    if(e.target.checked){
-    setCurrentProfile({...currentProfile, tags:[...currentProfile.tags, { _id: e.target.id, name: e.target.name}]})
-    setTagNames([...tagNames, e.target.name])
+    if (e.target.checked) {
+      setCurrentProfile({ ...currentProfile, tags: [...currentProfile.tags, { _id: e.target.id, name: e.target.name }] })
+      setTagNames([...tagNames, e.target.name])
     }
-    else{
+    else {
       let bufferTags = currentProfile.tags
       let index = tagNames.indexOf(e.target.name)
       bufferTags.splice(index, 1)
-      setCurrentProfile({...currentProfile, tags:bufferTags})
-      setTagNames(currentProfile.tags.map((e)=>e.name))
+      setCurrentProfile({ ...currentProfile, tags: bufferTags })
+      setTagNames(currentProfile.tags.map((e) => e.name))
     }
   }
 
   useEffect(() => {//Delete after form works
-    console.log('CurrentProfile:\n',currentProfile)
+    console.log('CurrentProfile:\n', currentProfile)
     console.log('This is tagNames', tagNames)
   }, [currentProfile])
 
@@ -43,13 +62,13 @@ const EditProfile = (props) => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
       .then(foundTags => {
-          console.log('Found Tags by INDEX', foundTags.tags)
-          setTags(foundTags.tags)
+        console.log('Found Tags by INDEX', foundTags.tags)
+        setTags(foundTags.tags)
       })
       .catch(err => console.log(err))
   }
 
-  const patchProfile = (e) =>{
+  const patchProfile = (e) => {
     e.preventDefault()
     console.log('Pressed Submit button')
     let preJSONBody = {
@@ -60,53 +79,68 @@ const EditProfile = (props) => {
       userId: currentProfile.userId
     }
     const requestOptions = {
-        method: 'PATCH',
-        body: JSON.stringify(preJSONBody),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${props.user.token}`
-          },
+      method: 'PATCH',
+      body: JSON.stringify(preJSONBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.user.token}`
+      },
     }
     fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
-    .then(patchedProfile=> {
+      .then(patchedProfile => {
         props.msgAlert({
-            heading: 'Edited Profile',
-            message: messages.editProfileSuccess,
-            variant: 'success',
-          })
-      navigate('/')
-    })
-    .catch(err=>console.error(err))
+          heading: 'Edited Profile',
+          message: messages.editProfileSuccess,
+          variant: 'success',
+        })
+        navigate('/')
+      })
+      .catch(err => console.error(err))
   }
 
-    console.log(props)
-    return (
-        <div>
-          <h1>Edit a Profile</h1>
-          <form onSubmit={patchProfile}>
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input  onChange={handleChange} type="text" name="name"  id="name"/>
-            </div>
-            <div>
-              <label htmlFor="address">Address:</label>
-              <input onChange={handleChange} type="text" name="address" id="address"/>
-            </div>
-            <div>
-              <h2>Favorite Categories</h2>
-              {
-                tags.map(tag => (
-                  <li>
-                    <label htmlFor={tag.name}>{tag.name}</label>
-                    <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
-                  </li>
-                ))
-              }
-            </div>
-            <button type="submit">Submit Profile Edit</button>
-          </form>
+  console.log(props)
+  return (
+    <div style={body}>
+    <div className='container' style={bgc}>
+      <h5>Edit Profile</h5>
+
+      <Form onSubmit={patchProfile}>
+        <div className='container' style={box}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Name</Form.Label>
+            <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
+          </Form.Group>
         </div>
-      )
+
+        <div className='container' style={box}>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Address</Form.Label>
+            <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
+          </Form.Group>
+        </div>
+
+        <div className='container' style={box}>
+          <Card style={{ width: '18rem' }}>
+            <Card.Header>Favorites</Card.Header>
+            {
+              tags.map(tag => (
+                <li>
+                  <label htmlFor={tag.name}>{tag.name}</label>
+                  <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
+                </li>
+              ))
+            }
+          </Card>
+        </div>
+
+        <Button variant="light" type="submit" style={button}>
+          Submit
+        </Button>
+      </Form>
+
+    </div>
+    </div>
+  )
 }
 
 export default EditProfile

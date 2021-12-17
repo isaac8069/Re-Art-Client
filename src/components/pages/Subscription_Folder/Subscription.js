@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import { Route, useNavigate } from 'react-router-dom'
 import Checkout from './Checkout';
 import SignIn from '../../auth/SignIn'
 import messages from '../../shared/AutoDismissAlert/messages'
-import { Card, Button, Row, Col, CardGroup } from 'react-bootstrap';
+import { Card, Button, Row, Col, CardGroup } from 'react-bootstrap'
 
  
 const button = {
@@ -21,7 +21,7 @@ const icon = {
 // function that renders Subscription Page
 function Subscription(props) {
   // uses hook that allows navigation
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
  // handels when user trys to sign up for subscription
  // tests if user is populated
@@ -77,7 +77,7 @@ function Subscription(props) {
     Up to
         <br></br><b>4</b> pieces per season
     </Card.Text>
-    <Button variant="dark" style={button}>Go somewhere</Button>
+    <Button variant="dark" style={button}>Coming Soon</Button>
     <Card.Text>
     2 shipments per season <br></br>
     <b>$129</b> trial season <br></br> $149/season after
@@ -93,7 +93,7 @@ function Subscription(props) {
     Up to
         <br></br><b>6</b> pieces per season
     </Card.Text>
-    <Button variant="dark" style={button}>Go somewhere</Button>
+    <Button variant="dark" style={button}>Coming Soon</Button>
     <Card.Text>
     3 shipments per season <br></br>
     <b>$169</b> trial season <br></br> $189/season after
