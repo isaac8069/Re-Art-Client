@@ -51,33 +51,25 @@ const CreateProfile = (props) => {
 
   const postProfile = (e) =>{
     e.preventDefault()
-    // Get 2 pieces to put in their cart
-    fetch('http://localhost:8000/pieces')//this will be a new route eventually
-    .then(res => res.json())
-    .then(foundObject => {
-      console.log('foundObject: ',foundObject)
-      
-      let preJSONBody = {
-        name: newProfile.name,
-        address: newProfile.address,
-        tags: newProfile.tags,
-        isSubscribed: newProfile.isSubscribed,
-        userId: newProfile.userId,
-        
-      }
-      fetch('http://localhost:8000/profiles',{
-        method: 'POST',
-        body: JSON.stringify(preJSONBody),
-        headers: {'Content-Type': 'application/json'}
-      })
-      .then(response=>response.json())
-      .then(postedBounty=> {
-        props.msgAlert({
-          heading: 'Created Profile',
-          message: messages.profileCreationSuccessful,
-          variant: 'success',
-        })
-        navigate('/')
+    console.log('Pressed Submit button')
+    let preJSONBody = {
+      name: newProfile.name,
+      address: newProfile.address,
+      tags: newProfile.tags,
+      isSubscribed: newProfile.isSubscribed,
+      userId: newProfile.userId
+    }
+    fetch('http://localhost:8000/profiles',{
+      method: 'POST',
+      body: JSON.stringify(preJSONBody),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response=>response.json())
+    .then(postedProfile=> {
+      props.msgAlert({
+        heading: 'Created Profile',
+        message: messages.profileCreationSuccessful,
+        variant: 'success',
       })
       .catch(err=>console.error(err))
     })

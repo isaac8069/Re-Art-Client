@@ -78,7 +78,7 @@ function Checkout(props) {
     // boolean for communication with database isSubscribed
     // const [newSubscription, setNewSubscription] = useState()
 
-    // return success message or CheckoutForm component
+    // return success message or CheckoutForm
     console.log("subscriptionCompleted: ", subscriptionCompleted)
 
     // useEffect(() => {

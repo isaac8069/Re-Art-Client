@@ -8,5 +8,10 @@ export default {
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	signUpSubsubscription:"Must sign in and have a live profile to order subscription",
 	profileCreationSuccessful: 'Created Profile Successful',
+<<<<<<< HEAD
 	profileNeededToSubscribe: 'Must create a profile before subscribing'
+=======
+	editProfileSuccess: 'Edited Profile Successfully',
+	signedupforSubscribtion: 'Subscription Signed Up Successfully'
+>>>>>>> upstream/development
 }
