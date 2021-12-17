@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 // import SignIn from '../../auth/SignIn'
 import messages from '../../shared/AutoDismissAlert/messages'
 import { Card, Button, Row, Col, CardGroup } from 'react-bootstrap';
-
  
 const button = {
   margin: '20px',
@@ -13,7 +12,6 @@ const box = {
   textAlign: 'center',
   margin: '25px'
 }
-
 const icon = {
   margin: '15px'
 }
@@ -186,7 +184,6 @@ function Subscription(props) {
           {/* <button onClick={handleClick}>Click Here to sign up</button> */}
         
     </div>
- 
   )
 }
  

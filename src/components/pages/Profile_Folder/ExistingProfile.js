@@ -31,7 +31,7 @@ const ExistingProfile = (props) => {
     <div>
       <h1>My Profile</h1>
       <h3>Name: {props.profile.name}</h3>
-      <h3>Addres: {props.profile.address}</h3>
+      <h3>Address: {props.profile.address}</h3>
       <h4>List of my Favorites</h4>
       <ul>{tagsArray}</ul>
       <p>{subscription}</p>
