@@ -51,21 +51,34 @@ const CreateProfile = (props) => {
   }
 
   useEffect(() => {//Delete after form works
+<<<<<<< HEAD
+    // console.log('newProfile:\n',newProfile)
+=======
     console.log('newProfile:\n', newProfile)
+>>>>>>> upstream/development
   }, [newProfile])
 
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
       .then(foundTags => {
+<<<<<<< HEAD
+          // console.log('Found Tags by INDEX', foundTags.tags)
+          setTags(foundTags.tags)
+=======
         console.log('Found Tags by INDEX', foundTags.tags)
         setTags(foundTags.tags)
+>>>>>>> upstream/development
       })
       .catch(err => console.log(err))
   }
 
+<<<<<<< HEAD
+  const postProfile = (e) =>{
+=======
 
   const postProfile = (e) => {
+>>>>>>> upstream/development
     e.preventDefault()
     console.log('Pressed Submit button')
     let preJSONBody = {
@@ -91,7 +104,6 @@ const CreateProfile = (props) => {
         message: messages.profileCreationSuccessful,
         variant: 'success',
       })
-      navigate('/')
     })
       .catch(err => console.error(err))
   }
