@@ -50,6 +50,10 @@ const CreateProfile = (props) => {
     }
   }
 
+  useEffect(() => {//Delete after form works
+    console.log('newProfile:\n', newProfile)
+  }, [newProfile])
+
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
