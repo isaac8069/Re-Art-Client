@@ -105,12 +105,8 @@ const App = () => {
 				/>
 				<Route
 					path='/subscription'
-<<<<<<< HEAD
-					element={<Subscription profile={foundProfile} msgAlert={msgAlert} user={user} />}
-=======
 					element={<Subscription msgAlert={msgAlert} 
 						user={user} />}
->>>>>>> upstream/development
 				/>
 				<Route
 					path='/subscription/checkout'
