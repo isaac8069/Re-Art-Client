@@ -108,9 +108,38 @@ const EditProfile = (props) => {
           message: messages.editProfileSuccess,
           variant: 'success',
         })
-        navigate('/')
+        navigate('/profile')
       })
       .catch(err => console.error(err))
+  }
+
+  const patchSubscription = (e) => {
+    e.preventDefault()
+    let preJSONBody = {
+      isSubscribed: false,
+    }
+    const requestOptions = {
+      method: 'PATCH',
+      body: JSON.stringify(preJSONBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.user.token}`
+      },
+    }
+    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+      .then(patchedProfile => {
+        props.msgAlert({
+          heading: 'Edited Profile',
+          message: messages.editProfileSuccess,
+          variant: 'success',
+        })
+        navigate('/profile')
+      })
+      .catch(err => console.error(err))
+  }
+
+  const goBack = () => {
+    return navigate('/profile')
   }
 
   console.log(props)
@@ -133,10 +162,8 @@ const EditProfile = (props) => {
               <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
             </Form.Group>
           </div>
-          <div>
-            <label htmlFor="subscrition">Subscribed :</label>
-            <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition" />
-          </div>
+          
+         
 
           <div className='container' style={box}>
             <Card style={{ width: '18rem' }}>
@@ -153,8 +180,16 @@ const EditProfile = (props) => {
           </div>
 
           <Button variant="light" type="submit" style={button}>
-            Submit
+            Submit Edit
           </Button>
+          <Button variant="light" type="goBack" onClick={goBack} style={button}>
+            Cancle
+          </Button>
+
+          <Button hidden={!currentProfile.isSubscribed} variant="danger" type="goBack" onClick={patchSubscription} style={button}>
+            Cancle Subscription
+          </Button>
+
         </Form>
 
       </div>
