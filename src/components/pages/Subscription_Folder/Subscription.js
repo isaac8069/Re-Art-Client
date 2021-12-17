@@ -1,9 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'
-// import Checkout from './Checkout';
-// import SignIn from '../../auth/SignIn'
+import React from 'react'
+import { Route, useNavigate } from 'react-router-dom'
+import Checkout from './Checkout';
+import SignIn from '../../auth/SignIn'
 import messages from '../../shared/AutoDismissAlert/messages'
-import { Card, Button, Row, Col, CardGroup } from 'react-bootstrap';
+import { Card, Button, Row, Col, CardGroup } from 'react-bootstrap'
+
  
 const button = {
   margin: '20px',
@@ -19,7 +20,7 @@ const icon = {
 // function that renders Subscription Page
 function Subscription(props) {
   // uses hook that allows navigation
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
  // handels when user trys to sign up for subscription
  // tests if user is populated
@@ -79,36 +80,38 @@ function Subscription(props) {
           </Card>
           <br />
 
-          <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Text>
-              Up to
-                  <br></br><b>4</b> pieces per season
-              </Card.Text>
-              <Button variant="dark" style={button}>Go somewhere</Button>
-              <Card.Text>
-              2 shipment/season <br></br><b>Value access</b><br></br>
-              $129 trial season. $149/season after
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <br />
+<Card style={box} border="dark">
+  <Card.Body>
+  <Card.Title>Value Access</Card.Title>
+    <Card.Text>
+    Up to
+        <br></br><b>4</b> pieces per season
+    </Card.Text>
+    <Button variant="dark" style={button}>Coming Soon</Button>
+    <Card.Text>
+    2 shipments per season <br></br>
+    <b>$129</b> trial season <br></br> $149/season after
+    </Card.Text>
+  </Card.Body>
+</Card>
+<br />
 
-          <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Text>
-              Up to
-                  <br></br><b>6</b> pieces per season
-              </Card.Text>
-              <Button variant="dark" style={button}>Go somewhere</Button>
-              <Card.Text>
-              3 shipment/season <br></br><b>Premium access</b><br></br>
-              $169 trial season. $189/season after
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Row>
-      </div>
+<Card style={box} border="dark">
+  <Card.Body>
+  <Card.Title>Premium Access</Card.Title>
+    <Card.Text>
+    Up to
+        <br></br><b>6</b> pieces per season
+    </Card.Text>
+    <Button variant="dark" style={button}>Coming Soon</Button>
+    <Card.Text>
+    3 shipments per season <br></br>
+    <b>$169</b> trial season <br></br> $189/season after
+    </Card.Text>
+  </Card.Body>
+</Card>
+</CardGroup>
+</div>
 
 <div>
 <Row xs={1} md={2} className="g-4">

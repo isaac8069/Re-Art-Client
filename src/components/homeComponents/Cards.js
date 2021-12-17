@@ -7,11 +7,12 @@ import Photo3 from "./../homeComponents/images/pop.jpeg"
 
 
 const cardstyle = {
-    margin: '50px'
+    margin: '50px',
 }
 
 const image = {
-    height: '500px'
+    height: '100%',
+    objectFit: 'cover'
 }
 
 const text = {

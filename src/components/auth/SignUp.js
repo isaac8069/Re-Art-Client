@@ -8,7 +8,30 @@ import messages from '../shared/AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const SignUp = (props) => { 
+const box = {
+    textAlign: 'left',
+    margin: '2px',
+    padding: '5px'
+  }
+  
+  const button = {
+    margin: '10px',
+  }
+  
+  const bgc = {
+    backgroundColor: 'lightgrey'
+  }
+
+const SignUp = (props) => {
+	// constructor(props) {
+	// 	super(props)
+
+	// 	this.state = {
+	// 		email: '',
+	// 		password: '',
+	// 		passwordConfirmation: '',
+	// 	}
+	// }    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -47,12 +70,14 @@ const SignUp = (props) => {
 
     return (
         <div className='row'>
-            <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3>Sign Up</h3>
+            <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bgc}>
+                <h5>Sign Up</h5>
                 <Form onSubmit={onSignUp}>
+                <div className='container' style={box}>
                     <Form.Group controlId='email'>
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
+                            style={{ width: '18rem' }}
                             required
                             type='email'
                             name='email'
@@ -61,9 +86,13 @@ const SignUp = (props) => {
                             onChange={e => setEmail(e.target.value)}
                         />
                     </Form.Group>
+                    </div>
+
+                    <div className='container' style={box}>
                     <Form.Group controlId='password'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
+                            style={{ width: '18rem' }}
                             required
                             name='password'
                             value={password}
@@ -72,9 +101,13 @@ const SignUp = (props) => {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
+                    </div>
+
+                    <div className='container' style={box}>
                     <Form.Group controlId='passwordConfirmation'>
                         <Form.Label>Password Confirmation</Form.Label>
                         <Form.Control
+                            style={{ width: '18rem' }}
                             required
                             name='passwordConfirmation'
                             value={passwordConfirmation}
@@ -83,7 +116,9 @@ const SignUp = (props) => {
                             onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
+                    </div>
+
+                    <Button variant='light' type='submit' style={button}>
                         Submit
                     </Button>
                 </Form>
