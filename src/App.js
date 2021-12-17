@@ -61,11 +61,9 @@ const App = () => {
 			})
 			.catch(err => console.log('THIS IS ERR',err))
 		}
-		console.log('This is profile', foundProfile)
     }
 
 	const patchProfile = () => {
-		console.log('Pressed Submit button')
 		let preJSONBody = {
 		  name: foundProfile.name,
 		  address: foundProfile.address,
