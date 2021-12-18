@@ -1,4 +1,4 @@
-<img alt="art" src="./src/components/homeComponents/images/readme/readme_header2.jpg">
+<img alt="art" src="./src/components/homeComponents/images/readme/readme_header.jpg">
 
 # Re-Art
 
@@ -10,4 +10,4 @@ MongoDB, Express, React, Node
 
 ## Styling
 
-<img alt="art" src="./components/homeComponents/images/readme/design_inspo.png">
+<img alt="art" src="./src/components/homeComponents/images/readme/design_inspo.png">
