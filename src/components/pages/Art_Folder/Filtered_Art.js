@@ -4,7 +4,7 @@ import Pieces from './Pieces'
 // navigate for redirecting to checkout
 import { useNavigate } from 'react-router-dom'
 // button styling
-import { Button } from 'react-bootstrap'
+import { Button, Card, CardGroup } from 'react-bootstrap'
 
 const button = {
     margin: '10px',
@@ -28,7 +28,7 @@ const Filtered_Art = (props) => {
     }, [])
 
     // Maps art state and passes info from object to Pieces component
-    let pieces = <h1>No Art Found! Be less picky</h1>
+    let pieces = <h1>No Art Found! Go to your profile to add words to describe your art preference.</h1>
     // console.log('art: ',art)
     if(art){
         pieces = art.map(a => {
@@ -47,12 +47,28 @@ const Filtered_Art = (props) => {
         return navigate('/subscription/checkout')
       }
 
+    // the return section doesn't like this function for some reason
+    // const chosenTags = () => {
+    //     props.profile.tags.map((tag)=>{
+    //         return tag.name
+    //         // try .join(',')
+    //     }) 
+    // }
+
     return (
         <div>
-            <Button onClick={redirectToCheckout} variant="light" style={button}>Proceed to Checkout</Button>
-            <h4>Your tags:</h4>
-            {/* {props.profile.tags.toString()} */}
-            <h2>Art based off your tags:</h2>
+            <div className="row">
+                <div className = "col">
+                    <h3>Art based off your tags of {
+                    props.profile.tags.map((tag)=>{
+                        return tag.name
+                    }) }</h3>
+                    <p>Below is a sampling of the artwork we will send you, based on your profile.</p>
+                </div>
+                <div className = "col">
+                    <Button onClick={redirectToCheckout} variant="light" style={button}>Proceed to Checkout >>></Button>
+                </div>
+            </div>
             {pieces}
         </div>
     )
