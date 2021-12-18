@@ -66,7 +66,7 @@ const Filtered_Art = (props) => {
                     <p>Below is a sampling of the artwork we will send you, based on your profile.</p>
                 </div>
                 <div className = "col">
-                    <Button onClick={redirectToCheckout} variant="light" style={button}>Proceed to Checkout <text>&#8594;</text></Button>
+                    <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>
                 </div>
             </div>
             {pieces}
