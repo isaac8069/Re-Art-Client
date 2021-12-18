@@ -24,7 +24,8 @@ const password = {
   textDecoration: 'none',
   textAlign: 'left',
   margin: '2px',
-  padding: '5px'
+  padding: '5px',
+  color: 'teal'
 }
 
 

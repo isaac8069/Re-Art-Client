@@ -72,14 +72,14 @@ function Subscription(props) {
             <Card.Title>Basic Access</Card.Title>
               <Card.Text>
                 Up to
-                <br></br><b>1</b> piece per season
+                <br></br><b>2</b> pieces per season
               </Card.Text>
               <div>
                 <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
               </div>
               <Card.Text>
-                1 shipment/season <br></br>
-                <b>$89</b> trial season. $109/season after
+                1 shipment per season <br></br>
+                <b>$89</b> trial season <br></br>$109/season after
               </Card.Text>
 
             </Card.Body>
@@ -111,7 +111,7 @@ function Subscription(props) {
               </Card.Text>
               <Button variant="dark" style={button}>Coming Soon</Button>
               <Card.Text>
-                3 shipments per season with the option to choose your pieces <br></br>
+                3 shipments per season <br></br>Choose your pieces<br></br> 
                 <b>$169</b> trial season <br></br> $189/season after
               </Card.Text>
             </Card.Body>
