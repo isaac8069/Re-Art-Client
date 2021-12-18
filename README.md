@@ -57,4 +57,11 @@ npm start
 
 ## Cloud Deployment
 
-The app is also deployed on Keroku and can be accessed [here](https://nodejs.org/en/)
+The app is also deployed on Heroku and can be accessed [here](https://nodejs.org/en/)
+
+## Contributors
+
+- [Mackenzie Miller](https://github.com/Mackmiller) (Project Manager) - Fullstack Developement, UX/UI
+- [Isaac Newman](https://github.com/isaac8069) (Git Manager) - Frontend Development, UX/UI
+- [Isaac Waggoner](https://github.com/iwaggoner) - Fullstack Development
+- [Michael Kohlberg](https://github.com/mgkdn9) - Fullstack Development
