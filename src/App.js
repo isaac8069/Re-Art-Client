@@ -18,6 +18,7 @@ import Filtered_Art from './components/pages/Art_Folder/Filtered_Art'
 import Subscription from './components/pages/Subscription_Folder/Subscription'
 import Checkout from './components/pages/Subscription_Folder/Checkout'
 import EditProfile from './components/pages/Profile_Folder/EditProfile'
+import About from './components/pages/About_Folder/About'
 
 const App = () => {
 
@@ -124,6 +125,10 @@ const App = () => {
 				<Route
 					path='/available_art'
 					element={<Art msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/about'
+					element={<About msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/filtered_available_art'
