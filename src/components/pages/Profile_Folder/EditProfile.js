@@ -180,10 +180,10 @@ const EditProfile = (props) => {
           </div>
 
           <Button variant="light" type="submit" style={button}>
-            Submit Edit
+            Submit
           </Button>
           <Button variant="light" type="goBack" onClick={goBack} style={button}>
-            Cancle
+            Cancel
           </Button>
 
           <Button hidden={!currentProfile.isSubscribed} variant="danger" type="goBack" onClick={patchSubscription} style={button}>

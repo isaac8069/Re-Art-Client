@@ -4,10 +4,17 @@ import Pieces from './Pieces'
 // navigate for redirecting to checkout
 import { useNavigate } from 'react-router-dom'
 // button styling
-import { Button, Card, CardGroup } from 'react-bootstrap'
+import { Button, Card, Row, Col, CardGroup } from 'react-bootstrap'
+
 
 const button = {
     margin: '10px',
+  }
+
+const box = {
+    textAlign: 'center',
+    // margin: '2px',
+    padding: '5px'
   }
 
 const Filtered_Art = (props) => {
@@ -65,6 +72,23 @@ const Filtered_Art = (props) => {
                         return tag.name
                     }) } */}
                     <p>Below is a sampling of the artwork we will send you, based on your profile preferences. You can update preferences anytime in your profile.</p>
+
+                    <Row xs={1} md={2} className="g-4">
+  {Array.from({ length: 4 }).map((_, idx) => (
+    <Col style={box}>
+      <Card>
+        <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/7/7c/Brushstrokes.png" />
+        <Card.Body>
+          <Card.Title>Card title</Card.Title>
+          <Card.Text>
+            Text goes here if needed.
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
                 </div>
                 <div className = "col">
                     <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>
