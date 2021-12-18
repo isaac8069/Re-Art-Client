@@ -7,3 +7,7 @@ Getting tired of the same old art on the walls of your home? Use our subscriptio
 ## Tech stack
 
 MongoDB, Express, React, Node
+
+## Styling
+
+<img alt="art" src="./components/homeComponents/images/readme/design_inspo.png">
