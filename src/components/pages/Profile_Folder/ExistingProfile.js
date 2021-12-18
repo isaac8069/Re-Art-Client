@@ -44,7 +44,6 @@ const ExistingProfile = (props) => {
   }, [props.profile])
 
   const editProfile = () => {
-    console.log('Edit Profile Pressed')
     return navigate('/profile/edit')
   }
 
