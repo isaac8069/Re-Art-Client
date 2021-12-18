@@ -10,4 +10,11 @@ MongoDB, Express, React, Node
 
 ## Styling
 
-<img alt="art" src="./src/components/homeComponents/images/readme/design_inspo.png">
+<img alt="design" src="./src/components/homeComponents/images/readme/design_inspo.png">
+
+## Wireframes
+
+<img alt="early wireframes" src="./src/components/homeComponents/images/readme/old_wireframes.png">
+<img alt="wireframes final version" src="./src/components/homeComponents/images/readme/final_wireframes.png">
+
+## ERDs for database management
