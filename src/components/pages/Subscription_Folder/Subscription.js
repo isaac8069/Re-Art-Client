@@ -43,7 +43,8 @@ function Subscription(props) {
     } else {
       // Check for profile created
       if(props.profile){
-        return navigate('/subscription/checkout')
+        // return navigate('/subscription/checkout')
+        return navigate('/filtered_available_art')
       } else {
         props.msgAlert({
           heading: 'Please create a profile',
@@ -67,7 +68,7 @@ function Subscription(props) {
             <Card.Body>
               <Card.Text>
                   Up to
-                  <br></br><b>2</b> pieces per season
+                  <br></br><b>1</b> piece per season
               </Card.Text>
               <div>
               <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>

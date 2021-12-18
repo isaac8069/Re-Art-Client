@@ -7,11 +7,12 @@ import Photo3 from "./../homeComponents/images/pop.jpeg"
 
 
 const cardstyle = {
-    margin: '50px',
+    margin: '25px',
+    height: '400px'
 }
 
 const image = {
-    height: '100%',
+    height: '80%',
     objectFit: 'cover'
 }
 
@@ -28,8 +29,8 @@ const Cards = () => {
 
     return (
         <div>
-            <CardGroup style={cardstyle}>
-                <Card>
+            <CardGroup >
+                <Card style={cardstyle}>
                     <Card.Img variant="top" src={Photo2} style={image} />
                     <Card.Body>
                         <Card.Text style={text}>
@@ -38,7 +39,7 @@ const Cards = () => {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card>
+                <Card style={cardstyle}>
                     <Card.Img variant="top" src={Photo3} style={image} />
                     <Card.Body>
                         <Card.Text style={text}>
@@ -47,7 +48,7 @@ const Cards = () => {
                     </Card.Body>
                 </Card>
                 <br />
-                <Card>
+                <Card style={cardstyle}>
                     <Card.Img variant="top" src={Photo1} style={image} />
                     <Card.Body>
                         <Card.Text style={text}>

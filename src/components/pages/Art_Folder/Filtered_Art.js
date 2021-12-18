@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react'
 // Import Pieces to show each art piece
 import Pieces from './Pieces'
+// navigate for redirecting to checkout
+import { useNavigate } from 'react-router-dom'
+// button styling
+import { Button, Card, CardGroup } from 'react-bootstrap'
+
+const button = {
+    margin: '10px',
+  }
 
 const Filtered_Art = (props) => {
 
   console.log('Profile: ',props.profile)
+  const navigate = useNavigate()
 
     // State that holds all objects from Server
     const [art, setArt] = useState([])
@@ -19,7 +28,7 @@ const Filtered_Art = (props) => {
     }, [])
 
     // Maps art state and passes info from object to Pieces component
-    let pieces = <h1>No Art Found! Be less picky</h1>
+    let pieces = <h5>No Art Found! Make sure your art preferences are in your profile.</h5>
     // console.log('art: ',art)
     if(art){
         pieces = art.map(a => {
@@ -34,11 +43,33 @@ const Filtered_Art = (props) => {
         })
     }
 
+    const redirectToCheckout = () => {
+        return navigate('/subscription/checkout')
+      }
+
+    // the return section doesn't like this function for some reason
+    // const chosenTags = () => {
+    //     props.profile.tags.map((tag)=>{
+    //         return tag.name
+    //         // try .join(',')
+    //     }) 
+    // }
+
     return (
         <div>
-            <h4>Your tags:</h4>
-            {/* {props.profile.tags.toString()} */}
-            <h2>Art based off your tags:</h2>
+            <div className="row">
+                <div className = "col">
+                    <h3>Our art, your preferences. </h3>
+                        {/* used to work now it doesn't consistently{
+                    props.profile.tags.map((tag)=>{
+                        return tag.name
+                    }) } */}
+                    <p>Below is a sampling of the artwork we will send you, based on your profile preferences. You can update preferences anytime in your profile.</p>
+                </div>
+                <div className = "col">
+                    <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>
+                </div>
+            </div>
             {pieces}
         </div>
     )
