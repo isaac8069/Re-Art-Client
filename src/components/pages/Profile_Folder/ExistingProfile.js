@@ -20,7 +20,11 @@ const bgc = {
 }
 
 const password = {
-  cursor: 'pointer'
+  cursor: 'pointer',
+  textDecoration: 'none',
+  textAlign: 'left',
+  margin: '2px',
+  padding: '5px'
 }
 
 
