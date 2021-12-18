@@ -18,3 +18,5 @@ MongoDB, Express, React, Node
 <img alt="wireframes final version" src="./src/components/homeComponents/images/readme/final_wireframes.png">
 
 ## ERDs for database management
+
+<img alt="wireframes final version" src="./src/components/homeComponents/images/readme/erd.png">
