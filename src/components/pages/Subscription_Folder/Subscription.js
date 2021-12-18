@@ -68,7 +68,7 @@ function Subscription(props) {
             <Card.Body>
               <Card.Text>
                   Up to
-                  <br></br><b>2</b> pieces per season
+                  <br></br><b>1</b> piece per season
               </Card.Text>
               <div>
               <Button onClick={handleClick} variant="dark" style={button}>Try Now</Button>
