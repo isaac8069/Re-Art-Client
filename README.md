@@ -1,4 +1,4 @@
-<img alt="art" src="public/art.jpg">
+<img alt="art" src="./components/homeComponents/images/readme/readme_header.jpg">
 
 # Re-Art
 
