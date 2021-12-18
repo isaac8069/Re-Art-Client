@@ -43,7 +43,8 @@ function Subscription(props) {
     } else {
       // Check for profile created
       if(props.profile){
-        return navigate('/subscription/checkout')
+        // return navigate('/subscription/checkout')
+        return navigate('/filtered_available_art')
       } else {
         props.msgAlert({
           heading: 'Please create a profile',
