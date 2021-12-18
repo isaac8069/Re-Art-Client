@@ -59,11 +59,12 @@ const Filtered_Art = (props) => {
         <div>
             <div className="row">
                 <div className = "col">
-                    <h3>Art based off your tags of {
+                    <h3>Art based off your profile. </h3>
+                        {/* used to work now it doesn't consistently{
                     props.profile.tags.map((tag)=>{
                         return tag.name
-                    }) }</h3>
-                    <p>Below is a sampling of the artwork we will send you, based on your profile.</p>
+                    }) } */}
+                    <p>Below is a sampling of the artwork we will send you, based on your profile preferences. You can update preferences anytime in your profile.</p>
                 </div>
                 <div className = "col">
                     <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>

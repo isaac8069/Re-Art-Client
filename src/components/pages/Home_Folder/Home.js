@@ -19,7 +19,8 @@ const subtitle = {
 	fontSize: '20px',
 	textAlign: 'center',
 	width: "550px",
-	margin: "0 auto"
+	margin: "0 auto",
+	paddingBottom: "20px"
 }
 const Home = (props) => {
 	// const { msgAlert, user } = props

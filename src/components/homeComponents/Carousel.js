@@ -8,7 +8,7 @@ import Image3 from "./../homeComponents/images/car2.jpeg"
 
 
 const carstyle = {
-  maxHeight: '500px',
+  maxHeight: '400px',
   maxWidth: '100%',
   objectFit: 'cover',
   marginTop: '50px'
