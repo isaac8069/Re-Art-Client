@@ -28,7 +28,7 @@ const Filtered_Art = (props) => {
     }, [])
 
     // Maps art state and passes info from object to Pieces component
-    let pieces = <h1>No Art Found! Go to your profile to add words to describe your art preference.</h1>
+    let pieces = <h5>No Art Found! Make sure your art preferences are in your profile.</h5>
     // console.log('art: ',art)
     if(art){
         pieces = art.map(a => {
@@ -59,7 +59,7 @@ const Filtered_Art = (props) => {
         <div>
             <div className="row">
                 <div className = "col">
-                    <h3>Art based off your profile. </h3>
+                    <h3>Our art, your preferences. </h3>
                         {/* used to work now it doesn't consistently{
                     props.profile.tags.map((tag)=>{
                         return tag.name
