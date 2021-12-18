@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react'
 // Import Pieces to show each art piece
 import Pieces from './Pieces'
+// navigate for redirecting to checkout
+import { useNavigate } from 'react-router-dom'
+// button styling
+import { Button } from 'react-bootstrap'
+
+const button = {
+    margin: '10px',
+  }
 
 const Filtered_Art = (props) => {
 
   console.log('Profile: ',props.profile)
+  const navigate = useNavigate()
 
     // State that holds all objects from Server
     const [art, setArt] = useState([])
@@ -34,8 +43,13 @@ const Filtered_Art = (props) => {
         })
     }
 
+    const redirectToCheckout = () => {
+        return navigate('/subscription/checkout')
+      }
+
     return (
         <div>
+            <Button onClick={redirectToCheckout} variant="light" style={button}>Proceed to Checkout</Button>
             <h4>Your tags:</h4>
             {/* {props.profile.tags.toString()} */}
             <h2>Art based off your tags:</h2>
