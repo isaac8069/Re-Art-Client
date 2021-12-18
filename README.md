@@ -35,15 +35,14 @@ MongoDB, Express, React, Node
 
 ## Daily Sprints
 
-1. ** Day 1: ** 
-** Sprint 1 (Friday):**  Planning out features and functionality, developing wireframes, planning data management, create schedule for the week via Trello
-** Sprints 2-3 (Saturday/Sunday):** Individual research/review of previously taught materials/documentations to prepare for project week
-** Sprint 4 (Monday):** Finalized project details (especially database details, wireframes, CRUD routes), created version 1 of server, continued researching applicable libraries for front end, uploaded initial project files to Github repo, began working on site components
-** Sprint 5 (Tuesday):** Continued work on site components (primarily having to do with profile, tags, and subscription), modified server repo as needed, worked on Stripe integration in subscription folder, restructured wireframes (see MVP version above)
-** Sprint 6 (Wednesday):** Worked on functionality of creating a new profile and sending data to the db, site homepage styling, data creation, added site redirects to reflect our MVP user flow wireframes
-** Sprint 7 (Thursday):** Modified wireframes and user flow to better work with the current code to make sure we would meet MVP on time. Worked on site styling, existing profile and edit profile. Integrated subscription status into user profile, based on successful checkout. Started researching and testing MongoDB data seeding capabilities.
-** Sprint 8 (Friday):** Continued debugging the subscription status in user profile and were able to successfully debug once the edit profile was completely functional. Ran into quite a few git issues later in the day and spent time troubleshooting our branches and main. Site styling continued and adjustments were made for smooth user flows and navigational needs. MVP technically functioning using local database after filtered art page was carefully merged into master.
-** Sprint 9-10 (Saturday/Sunday):** Final styling, seeding data
+1. Planning out features and functionality, developing wireframes, planning data management, create schedule for the week via Trello
+2. Individual research/review of previously taught materials/documentations to prepare for project week
+3. Finalized project details (especially database details, wireframes, CRUD routes), created version 1 of server, continued researching applicable libraries for front end, uploaded initial project files to Github repo, began working on site components
+4. Continued work on site components (primarily having to do with profile, tags, and subscription), modified server repo as needed, worked on Stripe integration in subscription folder, restructured wireframes (see MVP version above)
+5. Worked on functionality of creating a new profile and sending data to the db, site homepage styling, data creation, added site redirects to reflect our MVP user flow wireframes
+6. Modified wireframes and user flow to better work with the current code to make sure we would meet MVP on time. Worked on site styling, existing profile and edit profile. Integrated subscription status into user profile, based on successful checkout. Started researching and testing MongoDB data seeding capabilities.
+7. Continued debugging the subscription status in user profile and were able to successfully debug once the edit profile was completely functional. Ran into quite a few git issues later in the day and spent time troubleshooting our branches and main. Site styling continued and adjustments were made for smooth user flows and navigational needs. MVP technically functioning using local database after filtered art page was carefully merged into master.
+8. Final styling, seeding data
 
 
 ## Local Setup
