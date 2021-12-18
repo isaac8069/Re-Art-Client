@@ -2,11 +2,11 @@
 
 # Re-Art
 
-Getting tired of the same old art on the walls of your home? Use our subscription service to receive a new collection of artwork tailored to your unique taste in art and delivered right to your door, season after season.
+A fullstack MERN application which allows users to purchase a seasonal subscription service for artwork shipped to their home, curated to the user's unique selection of art categories.
 
 ## Tech stack
 
-MongoDB, Express, React, Node
+MongoDB, Express, React, Node, Stripe API
 
 ## Styling
 
@@ -33,7 +33,7 @@ MongoDB, Express, React, Node
 
 <img alt="wireframes final version" src="./src/components/homeComponents/images/readme/erd.png">
 
-## Daily Sprints
+## Timeline of Daily Sprints
 
 1. Planning out features and functionality, developing wireframes, planning data management, create schedule for the week via Trello
 2. Individual research/review of previously taught materials/documentations to prepare for project week
