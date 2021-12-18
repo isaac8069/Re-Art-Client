@@ -97,7 +97,7 @@ const Header = ({ user }) => (
 	<Navbar bg='secondary' variant='dark' expand='md'>
 		<Navbar.Brand>
 			<Link to='/'  style={linkStyle}>
-			<img src={logo2} alt="Re-Art logo" width="300" height="100"></img>
+			<img src={logo2} alt="Re-Art logo" max-width="300" height="100"></img>
 			</Link>
 		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
