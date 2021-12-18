@@ -50,7 +50,7 @@ npm start
 
 - On your browser, navigate to localhost3000 and the Re-Art project automatically appears on your locally hosted web page. Here are some project screenshots:
 <p align="center">  
-  <img alt="Project Preview" src="./src/components/homeComponents/images/readme/screenshot.jpg" />
+  <img alt="Project Preview" src="./src/components/homeComponents/images/readme/screenshot.png" />
 </p>
 
 - Part 2 of local installment includes forking and cloning the server repository, found [here](https://github.com/isaac8069/Re-Art-Server)
