@@ -130,7 +130,7 @@ function Subscription(props) {
             <Card.Body>
               <Card.Title>Free Shipping and Ruturns</Card.Title>
               <Card.Text>
-                Orders include a prepaid return label and typically arrive 3 business days after shipping.
+                Orders include a prepaid return label and typically arrive 2 business days after shipping.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -153,7 +153,7 @@ function Subscription(props) {
             <Card.Body>
               <Card.Title>Rental Coverage</Card.Title>
               <Card.Text>
-                Orders include a prepaid return label and typically arrive 2 business days after shipping.
+              All coverage is provided by a carrier with a group rating of “A” (Excellent) by AM Best – the leading rating agency for the insurance industry.
               </Card.Text>
             </Card.Body>
           </Card>
