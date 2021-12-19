@@ -7,7 +7,6 @@ import CheckoutForm from './CheckoutForm';
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
 
-
 //message to appear if card payment is successful
 const successMessage = () => {
     
@@ -94,7 +93,7 @@ function Checkout(props) {
 
     // API CALL
     const patchProfile = () =>{
-        successMessage()
+        // successMessage()
         console.log('Pressed Submit button')
         let preJSONBody = {
                 isSubscribed: subscriptionCompleted,
