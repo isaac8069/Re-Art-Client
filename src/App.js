@@ -26,9 +26,6 @@ const App = () => {
 	const [msgAlerts, setMsgAlerts] = useState([])
 	const [foundProfile, setFoundProfile] = useState({})
 
-	useEffect(() => {
-        getProfile()
-    }, [msgAlerts])
 	
 	// console.log('user in app', user)
 	// console.log('message alerts', msgAlerts)
@@ -36,6 +33,14 @@ const App = () => {
 		// console.log('clear user ran')
 		setUser(null)
 	}
+
+	// useEffect that runs when user state changes
+	// Only runs getProfile
+
+	useEffect(()=>{
+		getProfile()
+	}, [user])
+
 
 	const deleteAlert = (id) => {
 		setMsgAlerts((prevState) => {
@@ -52,17 +57,24 @@ const App = () => {
 		})
 	}
 
+	// Function that when called get the users profile based on user's Id
+	// This function sets the found data from the call to our foundProfile state
+	// Passed to components to ensure user state in App.js stats up to date
+
 	const getProfile = () => {
 		if(user){
 			fetch(`http://localhost:8000/profiles/user/${user._id}`)
 			.then(res => res.json())
 			.then(foundObject => {
 				setFoundProfile(foundObject.profile[0])
-				patchProfile()
 			})
 			.catch(err => console.log('THIS IS ERR',err))
 		}
 	}
+
+	// Function that saves our foundProfile state as an object and sends to the data base
+	// It sends the object as a PATCH request
+	// This is sent as a prop to ensure our PATCH route is up to date
 
 	const patchProfile = () => {
 		let preJSONBody = {
@@ -83,7 +95,8 @@ const App = () => {
 		fetch(`http://localhost:8000/profiles/user/${user._id}`, requestOptions)
 		  .then(patchedProfile => patchedProfile)
 		  .catch(err => console.error(err))
-	  }
+	}
+
 
 	return (
 		<Fragment>
@@ -117,7 +130,8 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} 
+							<Profile msgAlert={msgAlert}
+								getProfile={getProfile}
 								profile={foundProfile}
 								user={user} />
 						</RequireAuth>}
@@ -138,21 +152,24 @@ const App = () => {
 					path='/subscription'
 					element={<Subscription msgAlert={msgAlert} 
 						profile={foundProfile}
-						getProfile={getProfile}
+						patchProfile={patchProfile}
 						user={user} />}
 				/>
 				<Route
 					path='/subscription/checkout'
 					element={<Checkout msgAlert={msgAlert}
 									getProfile={getProfile}
+									patchProfile= {patchProfile}
 									user={user} />}
 				/>
 				<Route
 					path='/profile/edit'
-					element={<EditProfile msgAlert={msgAlert} 
+					element={<EditProfile msgAlert={msgAlert}
+									getProfile={getProfile}
 									profile={foundProfile}
 									user={user} />
 							}
+							
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
