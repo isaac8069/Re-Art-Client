@@ -3,21 +3,19 @@ import { Card, CardGroup } from "react-bootstrap"
 import CommunityImage from "./../homeComponents/images/community1.jpeg"
 import CommunityImage2 from "./../homeComponents/images/community2.jpg"
 
-
 const communitystyle = {
     height: '400px',
     objectFit: 'cover'
 }
-
 const communitystyle2 = {
     height: '400px',
     objectFit: 'cover'
 }
-
 const space = {
     textAlign: "center",
     margin: '45px'
 }
+
 const Community = () => {
 
     return (
@@ -36,7 +34,7 @@ const Community = () => {
                             "I love switching out my artwork each season, and I don't even have to leave my house."
                         </Card.Text>
                         <Card.Text>
-                            "I started out with the lowest tier of artwork delivery (1 per season) and now I am receiving 8 per season and couldn't be happier that my house is turning into an art museum!"
+                            "I started out with the lowest tier of artwork delivery (1 per season) and now I am receiving 6 per season and couldn't be happier that my house is turning into an art museum!"
                         </Card.Text>
                         <Card.Text>
                             "I no longer need an interior designer to handle my artwork for me."

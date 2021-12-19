@@ -1,9 +1,7 @@
-
 import { Card } from 'react-bootstrap'
 
-
+// this document is similar to the Pieces.js, except the desciptions of each piece are commented out.
 const Pieces = (props) => {
-
     const imgStyle = {
         width: '350px',
         height: "350px",
@@ -29,7 +27,7 @@ const Pieces = (props) => {
             <img style={imgStyle} src={props.imgUrl}></img>
             <h2 style={title}>{props.title}</h2>
             <h4 style={subtitle}>Artist: {props.artist}</h4>
-            <p style={subtitle}>Description: {props.description}</p>
+            {/* <p style={subtitle}>Description: {props.description}</p> */}
             </Card>
         </div>
     )

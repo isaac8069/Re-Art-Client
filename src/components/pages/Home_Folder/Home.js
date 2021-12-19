@@ -8,13 +8,11 @@ const text = {
 	margin: '50px',
 	fontSize: '40px'
 }
-
 const title = {
 	fontSize: '40px',
 	textAlign: 'center',
 	margin: '50px'
 }
-
 const subtitle = {
 	fontSize: '20px',
 	textAlign: 'center',

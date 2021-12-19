@@ -11,56 +11,51 @@ const cardstyle = {
     border: "none"
 
 }
-
 const text = {
     fontSize: '40px',
     width: "400px",
     marginTop: '40px'
 }
-
 const text2 = {
   fontSize: '15px',
   width: "400px",
   marginTop: '20px',
   marginBottom: '20px'
 }
-
 const image = {
   minWidth: "400px"
 }
 
 const PlansSection = () => {
-
   const navigate = useNavigate()
-const handleClick = (e) =>{
-  return(
-    navigate('/subscription')
-  )
-}
-return (
-<div>
+  const handleClick = (e) =>{
+    return(
+      navigate('/subscription')
+    )
+  }
+  return (
+  <div>
     <div className="row">
       <div className="col">
-      <Card style={cardstyle}>
-        <Card.Img variant="top" src={PlansImage} style={image} />
-      </Card>
+        <Card style={cardstyle}>
+          <Card.Img variant="top" src={PlansImage} style={image} />
+        </Card>
       </div>
       <br />
       <div className="col">
-      <Card style={cardstyle}>
-      <Card.Body>
-        <Card.Title style={text}>Explore Our Subscriptions</Card.Title>
-        <Card.Text style={text2}>
-          We have a plan for every budget, tiered by the number of art pieces delivered each season.
-        </Card.Text>
-        <Button variant="dark" onClick={handleClick}>Learn More</Button>
-       </Card.Body>
-      </Card>
+        <Card style={cardstyle}>
+        <Card.Body>
+          <Card.Title style={text}>Explore Our Subscriptions</Card.Title>
+          <Card.Text style={text2}>
+            We have a plan for every budget, tiered by the number of art pieces delivered each season.
+          </Card.Text>
+          <Button variant="dark" onClick={handleClick}>Learn More</Button>
+        </Card.Body>
+        </Card>
       </div>
     </div>
-
-</div>
-)
+  </div>
+  )
 }
 
 export default PlansSection

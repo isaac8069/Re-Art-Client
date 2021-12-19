@@ -5,25 +5,20 @@ import Photo1 from "./../homeComponents/images/photo1.jpeg"
 import Photo2 from "./../homeComponents/images/Modern1.jpeg"
 import Photo3 from "./../homeComponents/images/pop.jpeg"
 
-
 const cardstyle = {
     margin: '25px',
     height: '400px'
 }
-
 const image = {
     height: '80%',
     objectFit: 'cover'
 }
-
 const text = {
     textAlign: 'center',
     textDecoration: 'none',
     color: 'black',
     fontSize: '25px'
 }
-
-
 
 const Cards = () => {
 
