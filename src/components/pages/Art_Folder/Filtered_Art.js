@@ -31,7 +31,6 @@ const button = {
   }
 
   const list = {
-    marginBottom: "40px",
     textAlign: 'center',
     listStyleType: 'none'
   }
