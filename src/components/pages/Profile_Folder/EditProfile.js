@@ -19,8 +19,14 @@ const bgc = {
   backgroundColor: 'lightgrey'
 }
 
-const body = {
-  // marginTop: '10px'
+const fav = {
+  textAlign: 'left',
+  margin: '2px',
+  listStyle: 'none'
+}
+
+const check = {
+  padding: '5px'
 }
 
 const EditProfile = (props) => {
@@ -144,7 +150,7 @@ const EditProfile = (props) => {
 
   console.log(props)
   return (
-    <div style={body}>
+    <div>
       <div className='container' style={bgc}>
         <h5>Edit Profile</h5>
 
@@ -170,8 +176,8 @@ const EditProfile = (props) => {
               <Card.Header>Favorites</Card.Header>
               {
                 tags.map(tag => (
-                  <li>
-                    <label htmlFor={tag.name}>{tag.name}</label>
+                  <li style={fav}>
+                    <label style={check} htmlFor={tag.name}>{tag.name}</label>
                     <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
                   </li>
                 ))
