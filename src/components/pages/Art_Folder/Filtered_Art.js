@@ -4,11 +4,36 @@ import Pieces from './Pieces'
 // navigate for redirecting to checkout
 import { useNavigate } from 'react-router-dom'
 // button styling
-import { Button, Card, Row, Col, CardGroup } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 
 const button = {
-    margin: '10px',
+    marginTop: '40px',
+  }
+
+  const buttonContainer = {
+    float: "right",
+    marginRight: '30px'
+  }
+
+  const title = {
+    fontSize: '40px',
+    textAlign: 'center',
+    margin: '38px 0px 20px 180px'
+  }
+  
+  const subtitle = {
+    fontSize: '20px',
+    textAlign: 'center',
+    width: "720px",
+    margin: "0 auto",
+    paddingBottom: "20px"
+  }
+
+  const list = {
+    marginBottom: "40px",
+    textAlign: 'center',
+    listStyleType: 'none'
   }
 
 
@@ -59,23 +84,24 @@ const Filtered_Art = (props) => {
 
     return (
         <div>
-            <div className="row">
-                <div className = "col">
-                    <h3>Our art, your preferences. </h3>
-                </div>
-                <div className = "col">
-                    <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>
-                </div>
+          <div style={buttonContainer}>
+              <Button onClick={redirectToCheckout} variant="light" style={button} className = "btn btn-outline-success">Proceed to Checkout <text>&#8594;</text></Button>
+          </div>
+          <div className="row">
+              <div className = "col">
+                <h3 style={title}>Our art, based on <em>your</em> preferences. </h3>
               </div>
-                        {/* used to work now it doesn't consistently{
-                    props.profile.tags.map((tag)=>{
-                        return tag.name
-                    }) } */}
-                    <p>Below is a sampling of the artwork we will send you, based on your profile preferences. You can update preferences anytime in your profile.</p>
-        
-              <div className = "row">            
-                {pieces}
-              </div>
+          </div>
+          <ul>
+            <p style={subtitle}>Below is a sampling of the artwork we will send you, based on your profile preferences of:</p>
+                  {props.profile.tags.map((tag)=>{
+                        return <li style={list}>{tag.name}</li>
+                    }) } 
+          </ul>
+
+          <div className = "row">            
+            {pieces}
+          </div>
         </div>
     )
 }
