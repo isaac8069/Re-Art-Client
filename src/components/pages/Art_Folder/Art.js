@@ -7,7 +7,6 @@ const title = {
     textAlign: 'center',
     margin: '38px 0px 20px 0px'
   }
-  
   const subtitle = {
     fontSize: '20px',
     textAlign: 'center',

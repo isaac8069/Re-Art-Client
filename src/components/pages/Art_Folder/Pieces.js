@@ -8,19 +8,16 @@ const Pieces = (props) => {
         width: '350px',
         height: "350px",
         objectFit: 'cover'
-
     }
     const cardStyle = {
         textAlign: 'center',
         width: '350px'    
     }
-
     const title = {
         fontSize: '20px',
         textAlign: 'center',
         marginTop: '25px'
     }
-    
     const subtitle = {
         fontSize: '14px',
         textAlign: 'center',

@@ -1,26 +1,21 @@
-
 import { Card } from 'react-bootstrap'
 
-
+// this document is similar to the Pieces.js, except the desciptions of each piece are commented out.
 const Pieces = (props) => {
-
     const imgStyle = {
         width: '350px',
         height: "350px",
         objectFit: 'cover'
-
     }
     const cardStyle = {
         textAlign: 'center',
         width: '350px'    
     }
-
     const title = {
         fontSize: '20px',
         textAlign: 'center',
         marginTop: '25px'
     }
-    
     const subtitle = {
         fontSize: '14px',
         textAlign: 'center',
