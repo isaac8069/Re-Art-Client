@@ -31,9 +31,16 @@ const password = {
 
 const ExistingProfile = (props) => {
 
+  // seting a stat to hold our tags, subscription, and useNavigate
+  // sets tags as loading until tag data comes back from dataBase
+  // sets subscription to loading untill data comes back from dataBase
+
   const [tagsArray, setTagsArray] = useState([<li>Loading...</li>])
   const [subscription, setSubscription] = useState('Loading...')
   const navigate = useNavigate()
+
+  // This use effect test the profile and sets outputs to page based on data
+  // The useEffect is set to run everytime profile changes
 
   useEffect(() => {
     if (props.profile.tags) {
@@ -48,9 +55,13 @@ const ExistingProfile = (props) => {
     }
   }, [props.profile])
 
+  // Function that runs when user clicks Edit Profile button
+
   const editProfile = () => {
     return navigate('/profile/edit')
   }
+
+  // Function that runs when user clicks Change Passwork button
 
   const changePassword = () => {
     return navigate('/change-password')

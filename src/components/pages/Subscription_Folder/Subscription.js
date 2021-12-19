@@ -47,6 +47,7 @@ function Subscription(props) {
       // Check for profile created
       if (props.profile) {
         // return navigate('/subscription/checkout')
+        props.patchProfile()
         return navigate('/filtered_available_art')
       } else {
         props.msgAlert({
