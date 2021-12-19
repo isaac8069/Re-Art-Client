@@ -26,9 +26,6 @@ const App = () => {
 	const [msgAlerts, setMsgAlerts] = useState([])
 	const [foundProfile, setFoundProfile] = useState({})
 
-	useEffect(() => {
-        getProfile()
-    }, [msgAlerts])
 	
 	// console.log('user in app', user)
 	// console.log('message alerts', msgAlerts)
@@ -36,6 +33,10 @@ const App = () => {
 		// console.log('clear user ran')
 		setUser(null)
 	}
+
+	useEffect(()=>{
+		getProfile()
+	}, [user])
 
 	const deleteAlert = (id) => {
 		setMsgAlerts((prevState) => {
@@ -58,7 +59,6 @@ const App = () => {
 			.then(res => res.json())
 			.then(foundObject => {
 				setFoundProfile(foundObject.profile[0])
-				patchProfile()
 			})
 			.catch(err => console.log('THIS IS ERR',err))
 		}
@@ -83,7 +83,8 @@ const App = () => {
 		fetch(`http://localhost:8000/profiles/user/${user._id}`, requestOptions)
 		  .then(patchedProfile => patchedProfile)
 		  .catch(err => console.error(err))
-	  }
+	}
+
 
 	return (
 		<Fragment>
@@ -117,7 +118,9 @@ const App = () => {
 					path='/profile'
 					element={
 						<RequireAuth user={user}>
-							<Profile msgAlert={msgAlert} 
+							<Profile msgAlert={msgAlert}
+								getProfile={getProfile}
+								patchProfile={patchProfile}
 								profile={foundProfile}
 								user={user} />
 						</RequireAuth>}
@@ -138,6 +141,7 @@ const App = () => {
 					path='/subscription'
 					element={<Subscription msgAlert={msgAlert} 
 						profile={foundProfile}
+						patchProfile={patchProfile}
 						getProfile={getProfile}
 						user={user} />}
 				/>
@@ -145,14 +149,18 @@ const App = () => {
 					path='/subscription/checkout'
 					element={<Checkout msgAlert={msgAlert}
 									getProfile={getProfile}
+									patchProfile= {patchProfile}
 									user={user} />}
 				/>
 				<Route
 					path='/profile/edit'
-					element={<EditProfile msgAlert={msgAlert} 
+					element={<EditProfile msgAlert={msgAlert}
+									getProfile={getProfile}
+									patchProfile={patchProfile}
 									profile={foundProfile}
 									user={user} />
 							}
+							
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

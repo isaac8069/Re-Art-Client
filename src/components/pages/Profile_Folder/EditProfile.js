@@ -57,35 +57,19 @@ const EditProfile = (props) => {
     }
   }
 
-  const handleSubscription = e => {
-    console.log('box clicked')
-    if (e.target.checked) {
-      setCurrentProfile({ ...currentProfile, isSubscribed: true })
-    }
-    else {
-      setCurrentProfile({ ...currentProfile, isSubscribed: false })
-    }
-  }
-
-  useEffect(() => {//Delete after form works
-    console.log('CurrentProfile:\n', currentProfile)
-    console.log('This is tagNames', tagNames)
-  }, [currentProfile])
-
   // api call the gets the tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
       .then(foundTags => {
-        console.log('Found Tags by INDEX', foundTags.tags)
         setTags(foundTags.tags)
       })
       .catch(err => console.log(err))
   }
 
+  // call to data base with new profile to update
   const patchProfile = (e) => {
     e.preventDefault()
-    console.log('Pressed Submit button')
     let preJSONBody = {
       name: currentProfile.name,
       address: currentProfile.address,
@@ -103,16 +87,13 @@ const EditProfile = (props) => {
     }
     fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
       .then(patchedProfile => {
-        props.msgAlert({
-          heading: 'Edited Profile',
-          message: messages.editProfileSuccess,
-          variant: 'success',
-        })
+        props.getProfile()
         navigate('/profile')
       })
       .catch(err => console.error(err))
   }
 
+  // this is a single call to patch and cancle the user's subscribtion
   const patchSubscription = (e) => {
     e.preventDefault()
     let preJSONBody = {
@@ -128,21 +109,17 @@ const EditProfile = (props) => {
     }
     fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
       .then(patchedProfile => {
-        props.msgAlert({
-          heading: 'Edited Profile',
-          message: messages.editProfileSuccess,
-          variant: 'success',
-        })
+        props.getProfile()
         navigate('/profile')
       })
       .catch(err => console.error(err))
   }
 
+  // This is the cancle button that tacks user back to existing profile page
   const goBack = () => {
     return navigate('/profile')
   }
 
-  console.log(props)
   return (
     <div style={body}>
       <div className='container' style={bgc}>

@@ -23,6 +23,7 @@ const CreateProfile = (props) => {
 
   const navigate = useNavigate();
 
+  // this is the stat that is our profile data outline and will be sent to Data Base
   const [newProfile, setNewProfile] = useState({
     //Other stuff will go in this object but basically we need to declare a property called tags as an array so that the spread operator will work in the first call of handleCheck
     tags: [],
@@ -31,13 +32,17 @@ const CreateProfile = (props) => {
   })
   const [tags, setTags] = useState([])
 
+  // gets the tags with API call to database
   useEffect(() => {
     getTags()
   }, [])
 
+  // this is called when the input field is changed for name and addrss of profile
   const handleChange = e => {
     setNewProfile({ ...newProfile, [e.target.name]: e.target.value })
   }
+
+  // this handels the tags and if a tag is changed then it makes the adjustment to the profile state
   const handleCheck = e => {
     if (e.target.checked) {
       setNewProfile({ ...newProfile, tags: [...newProfile.tags, e.target.id] })
@@ -50,10 +55,12 @@ const CreateProfile = (props) => {
     }
   }
 
+  // 
   useEffect(() => {//Delete after form works
     console.log('newProfile:\n', newProfile)
   }, [newProfile])
 
+  // this is the API call for tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
@@ -65,6 +72,8 @@ const CreateProfile = (props) => {
   }
 
 
+  // This sets the profile state to a object
+  // That object is then sent to the Data base though a API call
   const postProfile = (e) => {
     e.preventDefault()
     console.log('Pressed Submit button')
@@ -84,13 +93,11 @@ const CreateProfile = (props) => {
       },
     }
     fetch('http://localhost:8000/profiles', requestOptions)
-    .then(response=>response.json())
     .then(postedProfile=> {
-      props.msgAlert({
-        heading: 'Created Profile',
-        message: messages.profileCreationSuccessful,
-        variant: 'success',
-      })
+      console.log('getting Profile')
+      props.getProfile()
+      console.log('patching Profile')
+      props.patchProfile()  
       navigate('/')
     })
       .catch(err => console.error(err))

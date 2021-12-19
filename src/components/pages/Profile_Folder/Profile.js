@@ -5,9 +5,14 @@ import ExistingProfile from './ExistingProfile'
 
 const Profile = (props) => {
     if(props.profile){
-        return <ExistingProfile changePassword={props.changePassword} profile={props.profile}/>
+        return <ExistingProfile changePassword={props.changePassword}
+                        getProfile={props.getProfile}
+                        patchProfile={props.patchProfile}
+                        profile={props.profile}/>
     } else {
-        return <CreateProfile user={props.user} msgAlert={props.msgAlert} />
+        return <CreateProfile user={props.user} 
+                        getProfile={props.getProfile}
+                        msgAlert={props.msgAlert} />
     }
 }
 
