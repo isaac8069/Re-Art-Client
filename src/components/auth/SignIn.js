@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
@@ -18,18 +18,21 @@ const box = {
   }
   
   const bgc = {
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey',
+    marginTop: "20px",
+    padding: '25px'
+  }
+
+  const title = {
+    fontSize: '40px',
+    textAlign: 'left',
+    margin: '20px'
   }
 
 const SignIn = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-
-	// handleChange = (event) =>
-	// 	this.setState({
-	// 		[event.target.name]: event.target.value,
-	// 	})
 
 	const onSignIn = (event) => {
 		event.preventDefault()
@@ -58,10 +61,20 @@ const SignIn = (props) => {
 			})
 	}
 
+    //NEVER GOT FLESHED OUT
+    // Once they leave SignIn page for any reason, set the redirect path to default
+    // console.log('afterSignInTargetUrl: ',props.afterSignInTargetUrl)
+    // useEffect(() => {
+    //     // equivalent to componentWillUnmount
+    //     return function cleanup(){
+    //         props.setAfterSignInTargetUrl('/')
+    //     }
+    // })
+
     return (
         <div className='row'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bgc}>
-                <h5>Sign In</h5>
+                <h1 style={title}>Sign In</h1>
                 <Form onSubmit={onSignIn}>
                 <div className='container' style={box}>
                     <Form.Group controlId='email'>

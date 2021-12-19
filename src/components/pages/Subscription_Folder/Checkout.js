@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
-import Profile from '../Profile_Folder/Profile';
  
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
-
 
 //message to appear if card payment is successful
 const successMessage = () => {
@@ -30,40 +28,47 @@ const cart = () => {
         <React.Fragment>
             <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-muted">Your cart</span>
-            <span className="badge bg-secondary badge-pill">3</span>
+            <span className="badge bg-secondary badge-pill">4</span>
             </h4>
             <ul className="list-group mb-3">
                 <li className="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                    <h6 className="my-0">First artwork</h6>
-                    <small className="text-muted">Brief description</small>
+                    <h6 className="my-0">First piece</h6>
+                    <small className="text-muted">1 out of 4 seasons completed</small>
                     </div>
-                    <span className="text-muted">$200</span>
+                    <span className="text-muted">$89</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                    <h6 className="my-0">Second artwork</h6>
-                    <small className="text-muted">Brief description</small>
+                    <h6 className="my-0">Second piece</h6>
+                    <small className="text-muted">2 out of 4 seasons completed</small>
                     </div>
-                    <span className="text-muted">$200</span>
+                    <span className="text-muted">$109</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                    <h6 className="my-0">Third artwork</h6>
-                    <small className="text-muted">Brief description</small>
+                    <h6 className="my-0">Third piece</h6>
+                    <small className="text-muted">3 out of 4 seasons completed</small>
                     </div>
-                    <span className="text-muted">$200</span>
+                    <span className="text-muted">$109</span>
                 </li>
-                <li className="list-group-item d-flex justify-content-between bg-light">
+                <li className="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                    <h6 className="my-0">Fourth piece</h6>
+                    <small className="text-muted">4 out of 4 seasons completed</small>
+                    </div>
+                    <span className="text-muted">$109</span>
+                </li>
+                {/* <li className="list-group-item d-flex justify-content-between bg-light">
                     <div className="text-success">
                     <h6 className="my-0">Promo code</h6>
                     <small>NEWYEAR2022</small>
                     </div>
                     <span className="text-success">-$25</span>
-                </li>
+                </li> */}
                 <li className="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
-                    <strong>$575</strong>
+                    <strong>$416</strong>
                 </li>
             </ul>
         </React.Fragment>
@@ -88,7 +93,7 @@ function Checkout(props) {
 
     // API CALL
     const patchProfile = () =>{
-        successMessage()
+        // successMessage()
         console.log('Pressed Submit button')
         let preJSONBody = {
                 isSubscribed: subscriptionCompleted,
@@ -128,7 +133,7 @@ function Checkout(props) {
                         <div className="col-md-7 order-md-1">
                             <Elements stripe={stripePromise}>
                                 {/* pass bill amount and setpaymentcompleted boolean down to CheckoutForm */}
-                                <CheckoutForm amount={575} setPaymentCompleted={setPaymentCompleted} setSubscriptionCompleted={setSubscriptionCompleted} />
+                                <CheckoutForm amount={416} setPaymentCompleted={setPaymentCompleted} setSubscriptionCompleted={setSubscriptionCompleted} />
                             </Elements>
                         </div>
                     </React.Fragment>

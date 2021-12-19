@@ -17,10 +17,20 @@ const box = {
 const button = {
     margin: '10px',
 }
-
 const bgc = {
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey',
+    marginTop: "20px",
+    padding: '25px'
 }
+const title = {
+    fontSize: '40px',
+    textAlign: 'left',
+    margin: '20px'
+  }
+  
+  const subtitle = {
+      fontSize: '20px',
+  }
 
 const SignUp = (props) => {
     // constructor(props) {
@@ -68,15 +78,14 @@ const SignUp = (props) => {
             })
     }
 
-
     return (
         <div className='row'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bgc}>
-                <h5>Sign Up</h5>
+                <h1 style={title}>Sign Up</h1>
                 <Form onSubmit={onSignUp}>
                     <div className='container' style={box}>
                         <Form.Group controlId='email'>
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label style={subtitle}>Email address</Form.Label>
                             <Form.Control
                                 style={{ width: '18rem' }}
                                 required
@@ -91,7 +100,7 @@ const SignUp = (props) => {
 
                     <div className='container' style={box}>
                         <Form.Group controlId='password'>
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label style={subtitle}>Password</Form.Label>
                             <Form.Control
                                 style={{ width: '18rem' }}
                                 required
@@ -106,7 +115,7 @@ const SignUp = (props) => {
 
                     <div className='container' style={box}>
                         <Form.Group controlId='passwordConfirmation'>
-                            <Form.Label>Password Confirmation</Form.Label>
+                            <Form.Label style={subtitle}>Password Confirmation</Form.Label>
                             <Form.Control
                                 style={{ width: '18rem' }}
                                 required

@@ -10,23 +10,38 @@ const box = {
   margin: '2px',
   padding: '5px'
 }
-
 const button = {
   margin: '10px',
 }
-
 const bgc = {
-  backgroundColor: 'lightgrey'
+  backgroundColor: 'lightgrey',
+  marginTop: "20px",
+  padding: '25px'
 }
-
-const body = {
-  // marginTop: '10px'
+const fav = {
+  textAlign: 'left',
+  margin: '2px',
+  listStyle: 'none'
+}
+const check = {
+  padding: '5px'
+}
+const title = {
+  fontSize: '40px',
+  textAlign: 'left',
+  margin: '20px'
+}
+const subtitle = {
+	fontSize: '20px',
 }
 
 const EditProfile = (props) => {
-  //useNavigate
+  //useNavigate for redirecting once profile is succesfully patched
+
   const navigate = useNavigate();
 
+  // State are set for our currentProfile that is passed from App.js and tags which will come from props.profile as well
+  // State for tagNames an array of the tag names need for testing which tags are currently attaced to the users profile
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
   const [tagNames, setTagNames] = useState(props.profile.tags.map((e) => e.name))
@@ -36,13 +51,15 @@ const EditProfile = (props) => {
     getTags()
   }, [])
 
-  // updating inputs to change currentProfile state
+  // A function that is called every time the name or address inputs are changed
+  // Function then sets these inputs as the currentProfile state  
   const handleChange = e => {
     setCurrentProfile({ ...currentProfile, [e.target.name]: e.target.value })
   }
 
-  // updating tags for currentProfile
-  // checks if li item is checked and then runs code to add entire object
+  // Function that runs any time user checks or unchecks one of the tag boxes
+  // Runs logic that either removes or addes tag object to currentProfile
+  // Also either removes or addes tag name to tagNames state
   const handleCheck = e => {
     if (e.target.checked) {
       setCurrentProfile({ ...currentProfile, tags: [...currentProfile.tags, { _id: e.target.id, name: e.target.name }] })
@@ -57,35 +74,21 @@ const EditProfile = (props) => {
     }
   }
 
-  const handleSubscription = e => {
-    console.log('box clicked')
-    if (e.target.checked) {
-      setCurrentProfile({ ...currentProfile, isSubscribed: true })
-    }
-    else {
-      setCurrentProfile({ ...currentProfile, isSubscribed: false })
-    }
-  }
-
-  useEffect(() => {//Delete after form works
-    console.log('CurrentProfile:\n', currentProfile)
-    console.log('This is tagNames', tagNames)
-  }, [currentProfile])
-
   // api call the gets the tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
       .then(foundTags => {
-        console.log('Found Tags by INDEX', foundTags.tags)
         setTags(foundTags.tags)
       })
       .catch(err => console.log(err))
   }
 
+  // Function runs when Edit Profile button is pressed
+  // Sets currentProfile state to an object that is sent to our data base as a PATCH request
+  // At the end getProfile is run to ensure that profile is up to date inside App.js
   const patchProfile = (e) => {
     e.preventDefault()
-    console.log('Pressed Submit button')
     let preJSONBody = {
       name: currentProfile.name,
       address: currentProfile.address,
@@ -103,60 +106,81 @@ const EditProfile = (props) => {
     }
     fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
       .then(patchedProfile => {
-        props.msgAlert({
-          heading: 'Edited Profile',
-          message: messages.editProfileSuccess,
-          variant: 'success',
-        })
-        navigate('/')
+        props.getProfile()
+        navigate('/profile')
       })
       .catch(err => console.error(err))
   }
 
-  console.log(props)
-  return (
-    <div style={body}>
-      <div className='container' style={bgc}>
-        <h5>Edit Profile</h5>
+  // Function runs any time user press the cancle subscription button
+  // Sends a object with only the isSubscribed attribute as a PATCH request to our data base
+  // At end runs getProfile to ensure that our profile in App.js is up to date
+  const patchSubscription = (e) => {
+    e.preventDefault()
+    let preJSONBody = {
+      isSubscribed: false,
+    }
+    const requestOptions = {
+      method: 'PATCH',
+      body: JSON.stringify(preJSONBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.user.token}`
+      },
+    }
+    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+      .then(patchedProfile => {
+        props.getProfile()
+        navigate('/profile')
+      })
+      .catch(err => console.error(err))
+  }
 
+  // Funtion that runs when cancle button is pressed that takes user back to existing profile
+  const goBack = () => {
+    return navigate('/profile')
+  }
+
+  return (
+    <div>
+      <div className='container' style={bgc}>
+        <h1 style={title}>Edit Profile</h1>
         <Form onSubmit={patchProfile}>
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Name</Form.Label>
+              <Form.Label style={subtitle}>Name</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
             </Form.Group>
           </div>
-
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Address</Form.Label>
+              <Form.Label style={subtitle}>Address</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
             </Form.Group>
           </div>
-          <div>
-            <label htmlFor="subscrition">Subscribed :</label>
-            <input onChange={handleSubscription} type="checkbox" checked={currentProfile.isSubscribed} name="subscrition" id="subscrition" />
-          </div>
-
           <div className='container' style={box}>
             <Card style={{ width: '18rem' }}>
-              <Card.Header>Favorites</Card.Header>
+              <Card.Header style={subtitle}>Favorite Art Categories</Card.Header>
               {
                 tags.map(tag => (
-                  <li>
-                    <label htmlFor={tag.name}>{tag.name}</label>
+                  <li style={fav}>
+                    <label style={check} htmlFor={tag.name}>{tag.name}</label>
                     <input onChange={handleCheck} type="checkbox" checked={tagNames.includes(tag.name) ? true : false} name={tag.name} id={tag._id} />
                   </li>
                 ))
               }
             </Card>
           </div>
-
           <Button variant="light" type="submit" style={button}>
             Submit
           </Button>
+          <Button variant="light" type="goBack" onClick={goBack} style={button}>
+            Cancel
+          </Button>
+          <Button hidden={!currentProfile.isSubscribed} variant="danger" type="goBack" onClick={patchSubscription} style={button}>
+            Cancle Subscription
+          </Button>
         </Form>
-
       </div>
     </div>
   )
