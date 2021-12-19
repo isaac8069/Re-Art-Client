@@ -73,14 +73,6 @@ const Filtered_Art = (props) => {
         return navigate('/subscription/checkout')
       }
 
-    // the return section doesn't like this function for some reason
-    // const chosenTags = () => {
-    //     props.profile.tags.map((tag)=>{
-    //         return tag.name
-    //         // try .join(',')
-    //     }) 
-    // }
-
     return (
         <div>
           <div style={buttonContainer}>
@@ -97,7 +89,6 @@ const Filtered_Art = (props) => {
                         return <li style={list}>{tag.name}</li>
                     }) } 
           </ul>
-
           <div className = "row">            
             {pieces}
           </div>
