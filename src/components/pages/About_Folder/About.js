@@ -4,13 +4,11 @@ const text = {
 	margin: '50px',
 	fontSize: '40px'
 }
-
 const title = {
 	fontSize: '40px',
 	textAlign: 'center',
 	margin: '50px'
 }
-
 const subtitle = {
 	fontSize: '20px',
 	textAlign: 'center',
@@ -18,7 +16,6 @@ const subtitle = {
 	margin: "0 auto",
 	paddingBottom: "20px"
 }
-
 const link = {
     color: '#74AFA3'
 }
@@ -26,7 +23,6 @@ const link = {
 const About = (props) => {
 	// const { msgAlert, user } = props
 	// console.log('props in home', props)
-
 	return (
 		<>
             <h1 style={title}>
@@ -37,7 +33,6 @@ const About = (props) => {
 			<div style={{maxWidth: "1100px", margin: "0 auto"}}>
 				<Cards />
 			</div>
-			
 		</>
 	)
 }
