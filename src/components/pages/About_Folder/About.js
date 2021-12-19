@@ -34,7 +34,7 @@ const About = (props) => {
 			</h1>
             <p style={subtitle}>This project was in partial fulfillment for the General Assembly Software Engineering Immersive program in December 2021. Our project's <a href="https://github.com/isaac8069/Re-Art-Client" style={link} target="_blank">Github repository</a> has more information about our collaborative process and project documentation.</p>
             <p style={subtitle}>Tech Stack: MongoDB, Express, React, Node</p>
-			<div>
+			<div style={{maxWidth: "1100px", margin: "0 auto"}}>
 				<Cards />
 			</div>
 			
