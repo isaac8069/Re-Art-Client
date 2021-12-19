@@ -93,6 +93,7 @@ const ExistingProfile = (props) => {
           <ListGroup variant="flush">
             <ListGroup.Item style={box}>{props.profile.name}</ListGroup.Item>
             <ListGroup.Item style={box}>{props.profile.address}</ListGroup.Item>
+            <ListGroup.Item style={box}>{subscription}</ListGroup.Item>
             <Card.Link style={box, password} onClick={changePassword}>Change Password</Card.Link>
           </ListGroup>
         </Card>
@@ -107,7 +108,7 @@ const ExistingProfile = (props) => {
         </Card>
       </div>
 
-      <p>{subscription}</p>
+      {/* <p>{subscription}</p> */}
       <Button onClick={editProfile} variant="light" style={button}>Edit Profile</Button>
       {/* <button onClick={editProfile}>Edit Profile</button> */}
 

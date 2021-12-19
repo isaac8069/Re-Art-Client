@@ -16,7 +16,23 @@ const button = {
 }
 
 const bgc = {
-  backgroundColor: 'lightgrey'
+  backgroundColor: 'lightgrey',
+  marginTop: "20px",
+  padding: '25px'
+}
+
+const title = {
+  fontSize: '40px',
+  textAlign: 'left',
+  margin: '20px'
+}
+
+const subtitle = {
+	fontSize: '20px',
+}
+
+const list = {
+  listStyle: 'none'
 }
 
 const CreateProfile = (props) => {
@@ -108,28 +124,28 @@ const CreateProfile = (props) => {
   return (
     <div>
       <div className='container' style={bgc}>
-        <h5>Create a Profile</h5>
+        <h1 style={title}>Create a Profile</h1>
         <Form onSubmit={postProfile}>
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Name</Form.Label>
+              <Form.Label style={subtitle}>Name</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
             </Form.Group>
           </div>
 
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Address</Form.Label>
+              <Form.Label style={subtitle}>Address</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
             </Form.Group>
           </div>
 
           <div className='container' style={box}>
             <Card style={{ width: '18rem' }}>
-              <Card.Header>Favorites</Card.Header>
+              <Card.Header style={subtitle}>Favorites</Card.Header>
               {
                 tags.map(tag => (
-                  <li>
+                  <li style={list}>
                     <label htmlFor={tag.name}>{tag.name}</label>
                     <input onChange={handleCheck} type="checkbox" name={tag.name} id={tag._id} style={button} />
                   </li>
