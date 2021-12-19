@@ -23,7 +23,9 @@ const CreateProfile = (props) => {
 
   const navigate = useNavigate();
 
-  // this is the stat that is our profile data outline and will be sent to Data Base
+  // Setting a state to hold our users newProfile that will be sent to data Base to be stored with usersId as reference
+  // Also setting a state for our tags
+
   const [newProfile, setNewProfile] = useState({
     //Other stuff will go in this object but basically we need to declare a property called tags as an array so that the spread operator will work in the first call of handleCheck
     tags: [],
@@ -32,17 +34,22 @@ const CreateProfile = (props) => {
   })
   const [tags, setTags] = useState([])
 
-  // gets the tags with API call to database
+  // useEffect that calls getTags everytime the component renders
+
   useEffect(() => {
     getTags()
   }, [])
 
-  // this is called when the input field is changed for name and addrss of profile
+  // Function that runs everytime that a input for either name or address changes
+  // Function sets all inputs to our newProfile state
+
   const handleChange = e => {
     setNewProfile({ ...newProfile, [e.target.name]: e.target.value })
   }
 
-  // this handels the tags and if a tag is changed then it makes the adjustment to the profile state
+  // This function will run everytime one of the profile checkboxes change
+  // Based on checked stats of the checkbox will either add or remove the targeted tag to newProfile
+
   const handleCheck = e => {
     if (e.target.checked) {
       setNewProfile({ ...newProfile, tags: [...newProfile.tags, e.target.id] })
@@ -55,12 +62,8 @@ const CreateProfile = (props) => {
     }
   }
 
-  // 
-  useEffect(() => {//Delete after form works
-    console.log('newProfile:\n', newProfile)
-  }, [newProfile])
+  // this is the API call for tags at end of funciton sets found tags to our tag state
 
-  // this is the API call for tags
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
@@ -72,8 +75,10 @@ const CreateProfile = (props) => {
   }
 
 
-  // This sets the profile state to a object
-  // That object is then sent to the Data base though a API call
+  // This funciton is set to run once the submit profile button is pressed
+  // This sets the newProfile state to a object that is then sent to our Data Base as a POST request
+  // At the end of function getProfile and patchProfile are run to ensure that profile data in App.js is up to date
+
   const postProfile = (e) => {
     e.preventDefault()
     console.log('Pressed Submit button')
@@ -94,10 +99,7 @@ const CreateProfile = (props) => {
     }
     fetch('http://localhost:8000/profiles', requestOptions)
     .then(postedProfile=> {
-      console.log('getting Profile')
       props.getProfile()
-      console.log('patching Profile')
-      props.patchProfile()  
       navigate('/')
     })
       .catch(err => console.error(err))

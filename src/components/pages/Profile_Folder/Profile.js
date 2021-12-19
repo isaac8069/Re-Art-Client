@@ -4,10 +4,13 @@ import ExistingProfile from './ExistingProfile'
 
 
 const Profile = (props) => {
+    
+    // If statment that test if user has a profile
+    // When user has a profile that are sent to ExistingProfile component with profile prop
+    // When the user dose not have profile is sent to CreateProfile with getProfile prop and user prop
+    
     if(props.profile){
         return <ExistingProfile changePassword={props.changePassword}
-                        getProfile={props.getProfile}
-                        patchProfile={props.patchProfile}
                         profile={props.profile}/>
     } else {
         return <CreateProfile user={props.user} 

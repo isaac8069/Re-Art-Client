@@ -34,9 +34,13 @@ const App = () => {
 		setUser(null)
 	}
 
+	// useEffect that runs when user state changes
+	// Only runs getProfile
+
 	useEffect(()=>{
 		getProfile()
 	}, [user])
+
 
 	const deleteAlert = (id) => {
 		setMsgAlerts((prevState) => {
@@ -53,6 +57,10 @@ const App = () => {
 		})
 	}
 
+	// Function that when called get the users profile based on user's Id
+	// This function sets the found data from the call to our foundProfile state
+	// Passed to components to ensure user state in App.js stats up to date
+
 	const getProfile = () => {
 		if(user){
 			fetch(`http://localhost:8000/profiles/user/${user._id}`)
@@ -63,6 +71,10 @@ const App = () => {
 			.catch(err => console.log('THIS IS ERR',err))
 		}
 	}
+
+	// Function that saves our foundProfile state as an object and sends to the data base
+	// It sends the object as a PATCH request
+	// This is sent as a prop to ensure our PATCH route is up to date
 
 	const patchProfile = () => {
 		let preJSONBody = {
@@ -120,7 +132,6 @@ const App = () => {
 						<RequireAuth user={user}>
 							<Profile msgAlert={msgAlert}
 								getProfile={getProfile}
-								patchProfile={patchProfile}
 								profile={foundProfile}
 								user={user} />
 						</RequireAuth>}
@@ -142,7 +153,6 @@ const App = () => {
 					element={<Subscription msgAlert={msgAlert} 
 						profile={foundProfile}
 						patchProfile={patchProfile}
-						getProfile={getProfile}
 						user={user} />}
 				/>
 				<Route
@@ -156,7 +166,6 @@ const App = () => {
 					path='/profile/edit'
 					element={<EditProfile msgAlert={msgAlert}
 									getProfile={getProfile}
-									patchProfile={patchProfile}
 									profile={foundProfile}
 									user={user} />
 							}

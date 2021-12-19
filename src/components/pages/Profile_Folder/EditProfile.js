@@ -24,25 +24,34 @@ const body = {
 }
 
 const EditProfile = (props) => {
-  //useNavigate
+  //useNavigate for redirecting once profile is succesfully patched
+
   const navigate = useNavigate();
+
+  // State are set for our currentProfile that is passed from App.js and tags which will come from props.profile as well
+  // State for tagNames an array of the tag names need for testing which tags are currently attaced to the users profile
 
   const [currentProfile, setCurrentProfile] = useState(props.profile)
   const [tags, setTags] = useState([])
   const [tagNames, setTagNames] = useState(props.profile.tags.map((e) => e.name))
 
   // call to api when components renders and gets the tags from database
+
   useEffect(() => {
     getTags()
   }, [])
 
-  // updating inputs to change currentProfile state
+  // A function that is called every time the name or address inputs are changed
+  // Function then sets these inputs as the currentProfile state  
+
   const handleChange = e => {
     setCurrentProfile({ ...currentProfile, [e.target.name]: e.target.value })
   }
 
-  // updating tags for currentProfile
-  // checks if li item is checked and then runs code to add entire object
+  // Function that runs any time user checks or unchecks one of the tag boxes
+  // Runs logic that either removes or addes tag object to currentProfile
+  // Also either removes or addes tag name to tagNames state
+
   const handleCheck = e => {
     if (e.target.checked) {
       setCurrentProfile({ ...currentProfile, tags: [...currentProfile.tags, { _id: e.target.id, name: e.target.name }] })
@@ -58,6 +67,7 @@ const EditProfile = (props) => {
   }
 
   // api call the gets the tags
+
   const getTags = () => {
     fetch('http://localhost:8000/tags')
       .then(res => res.json())
@@ -67,7 +77,10 @@ const EditProfile = (props) => {
       .catch(err => console.log(err))
   }
 
-  // call to data base with new profile to update
+  // Function runs when Edit Profile button is pressed
+  // Sets currentProfile state to an object that is sent to our data base as a PATCH request
+  // At the end getProfile is run to ensure that profile is up to date inside App.js
+
   const patchProfile = (e) => {
     e.preventDefault()
     let preJSONBody = {
@@ -93,7 +106,10 @@ const EditProfile = (props) => {
       .catch(err => console.error(err))
   }
 
-  // this is a single call to patch and cancle the user's subscribtion
+  // Function runs any time user press the cancle subscription button
+  // Sends a object with only the isSubscribed attribute as a PATCH request to our data base
+  // At end runs getProfile to ensure that our profile in App.js is up to date
+
   const patchSubscription = (e) => {
     e.preventDefault()
     let preJSONBody = {
@@ -115,7 +131,8 @@ const EditProfile = (props) => {
       .catch(err => console.error(err))
   }
 
-  // This is the cancle button that tacks user back to existing profile page
+  // Funtion that runs when cancle button is pressed that takes user back to existing profile
+
   const goBack = () => {
     return navigate('/profile')
   }
