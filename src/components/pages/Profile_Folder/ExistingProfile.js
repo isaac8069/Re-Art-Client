@@ -28,6 +28,10 @@ const password = {
   color: 'teal'
 }
 
+const list = {
+  listStyle: 'none'
+}
+
 
 const ExistingProfile = (props) => {
 
@@ -87,7 +91,7 @@ const ExistingProfile = (props) => {
         <Card style={{ width: '18rem' }}>
           <Card.Header>Favorites</Card.Header>
           <ListGroup variant="flush">
-            <ListGroup.Item>{tagsArray}</ListGroup.Item>
+            <ListGroup.Item style={list}>{tagsArray}</ListGroup.Item>
           </ListGroup>
         </Card>
       </div>
