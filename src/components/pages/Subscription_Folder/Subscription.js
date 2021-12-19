@@ -84,7 +84,7 @@ function Subscription(props) {
       <h4 style={subtitle}>Become a member to access a forever-rotating curated collection of art. No commitments. Pause or cancel anytime.</h4>
       <div>
         <Row style={box}>
-          <Card style={{ width: '18rem', margin: '20px', backgroundColor: "#E4F2F2", border: "none" }}>
+          <Card style={{ width: '18rem', margin: '20px', backgroundColor: "#D3D3D3", border: "none" }}>
             <Card.Body>
             <Card.Title>Basic Access</Card.Title>
               <Card.Text>
@@ -102,7 +102,7 @@ function Subscription(props) {
           </Card>
           <br />
 
-          <Card border="dark" style={{ width: '18rem', margin: '20px', backgroundColor: "#E4F2F2", border: "none" }}>
+          <Card border="dark" style={{ width: '18rem', margin: '20px', backgroundColor: "#D3D3D3", border: "none" }}>
             <Card.Body>
               <Card.Title>Value Access</Card.Title>
               <Card.Text>
@@ -118,7 +118,7 @@ function Subscription(props) {
           </Card>
           <br />
 
-          <Card border="dark" style={{ width: '18rem', margin: '20px', backgroundColor: "#E4F2F2", border: "none" }}>
+          <Card border="dark" style={{ width: '18rem', margin: '20px', backgroundColor: "#D3D3D3", border: "none" }}>
             <Card.Body>
               <Card.Title>Premium Access</Card.Title>
               <Card.Text>
