@@ -92,7 +92,7 @@ const Filtered_Art = (props) => {
               </div>
           </div>
           <ul>
-            <p style={subtitle}>Below is a sampling of the artwork we will send you, based on your profile preferences of:</p>
+            <p style={subtitle}>You have selected our <strong>Basic Access</strong> package. Below is a sampling of the artwork we will send you, based on your profile preferences of:</p>
                   {props.profile.tags.map((tag)=>{
                         return <li style={list}>{tag.name}</li>
                     }) } 
