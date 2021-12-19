@@ -86,6 +86,6 @@ The app is also deployed on Heroku and can be accessed [here](https://nodejs.org
 ## Contributors
 
 - [Mackenzie Miller](https://github.com/Mackmiller) (Project Manager) - Fullstack Development, UX/UI
-- [Isaac Newman](https://github.com/isaac8069) (Git Manager) - Frontend Development, UX/UI
+- [Isaac Newman](https://github.com/isaac8069) (Git Manager) - Fullstack Development, UX/UI
 - [Isaac Waggoner](https://github.com/iwaggoner) - Fullstack Development
 - [Michael Kohlberg](https://github.com/mgkdn9) - Fullstack Development
