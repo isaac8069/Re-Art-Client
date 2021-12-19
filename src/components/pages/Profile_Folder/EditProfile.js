@@ -16,7 +16,9 @@ const button = {
 }
 
 const bgc = {
-  backgroundColor: 'lightgrey'
+  backgroundColor: 'lightgrey',
+  marginTop: "20px",
+  padding: '25px'
 }
 
 const fav = {
@@ -27,6 +29,16 @@ const fav = {
 
 const check = {
   padding: '5px'
+}
+
+const title = {
+  fontSize: '40px',
+  textAlign: 'left',
+  margin: '20px'
+}
+
+const subtitle = {
+	fontSize: '20px',
 }
 
 const EditProfile = (props) => {
@@ -146,19 +158,19 @@ const EditProfile = (props) => {
   return (
     <div>
       <div className='container' style={bgc}>
-        <h5>Edit Profile</h5>
+        <h1 style={title}>Edit Profile</h1>
 
         <Form onSubmit={patchProfile}>
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Name</Form.Label>
+              <Form.Label style={subtitle}>Name</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Enter name" onChange={handleChange} type="text" name="name" id="name" />
             </Form.Group>
           </div>
 
           <div className='container' style={box}>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Address</Form.Label>
+              <Form.Label style={subtitle}>Address</Form.Label>
               <Form.Control style={{ width: '18rem' }} placeholder="Address" onChange={handleChange} type="text" name="address" id="address" />
             </Form.Group>
           </div>
@@ -167,7 +179,7 @@ const EditProfile = (props) => {
 
           <div className='container' style={box}>
             <Card style={{ width: '18rem' }}>
-              <Card.Header>Favorites</Card.Header>
+              <Card.Header style={subtitle}>Favorite Art Categories</Card.Header>
               {
                 tags.map(tag => (
                   <li style={fav}>

@@ -16,7 +16,9 @@ const button = {
 }
 
 const bgc = {
-  backgroundColor: 'lightgrey'
+  backgroundColor: 'lightgrey',
+  marginTop: "20px",
+  padding: '25px'
 }
 
 const password = {
@@ -32,6 +34,15 @@ const list = {
   listStyle: 'none'
 }
 
+const title = {
+  fontSize: '40px',
+  textAlign: 'left',
+  margin: '20px'
+}
+
+const subtitle = {
+	fontSize: '20px',
+}
 
 const ExistingProfile = (props) => {
 
@@ -75,10 +86,10 @@ const ExistingProfile = (props) => {
   return (
     <div>
     <div className='container' style={bgc}>
-      <h5>Profile</h5>
+      <h1 style={title}>Profile</h1>
       <div className='container' style={box}>
         <Card style={{ width: '18rem' }}>
-          <Card.Header>Account Details</Card.Header>
+          <Card.Header style={subtitle}>Account Details</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item style={box}>{props.profile.name}</ListGroup.Item>
             <ListGroup.Item style={box}>{props.profile.address}</ListGroup.Item>
@@ -89,7 +100,7 @@ const ExistingProfile = (props) => {
 
       <div className='container' style={box}>
         <Card style={{ width: '18rem' }}>
-          <Card.Header>Favorites</Card.Header>
+          <Card.Header style={subtitle}>Favorite Art Categories</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item style={list}>{tagsArray}</ListGroup.Item>
           </ListGroup>

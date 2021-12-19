@@ -18,7 +18,15 @@ const box = {
   }
   
   const bgc = {
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey',
+    marginTop: "20px",
+    padding: '25px'
+  }
+
+  const title = {
+    fontSize: '40px',
+    textAlign: 'left',
+    margin: '20px'
   }
 
 const SignIn = (props) => {
@@ -66,7 +74,7 @@ const SignIn = (props) => {
     return (
         <div className='row'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bgc}>
-                <h5>Sign In</h5>
+                <h1 style={title}>Sign In</h1>
                 <Form onSubmit={onSignIn}>
                 <div className='container' style={box}>
                     <Form.Group controlId='email'>
