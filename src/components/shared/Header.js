@@ -82,17 +82,6 @@ const unauthenticatedOptions = (
 	</>
 )
 
-
-// const alwaysOptions = (
-// 	<>
-// 		<Nav.Link>
-// 			<Link to='/about' style={linkStyle}>
-// 				About
-// 			</Link>
-// 		</Nav.Link>
-// 	</>
-// )
-
 const Header = ({ user }) => (
 	<Navbar bg='secondary' variant='dark' expand='md'>
 		<Navbar.Brand>

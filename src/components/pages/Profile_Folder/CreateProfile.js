@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 import { Form, Button, Card } from 'react-bootstrap'
-import Tag from '../../Tag'
-import messages from '../../shared/AutoDismissAlert/messages'
+import apiUrl from '../../../apiConfig'
 
 const box = {
   textAlign: 'left',
@@ -71,7 +69,7 @@ const CreateProfile = (props) => {
 
   // this is the API call for tags at end of funciton sets found tags to our tag state
   const getTags = () => {
-    fetch('http://localhost:8000/tags')
+    fetch(`${apiUrl}/tags`)
       .then(res => res.json())
       .then(foundTags => {
         console.log('Found Tags by INDEX', foundTags.tags)
@@ -102,7 +100,7 @@ const CreateProfile = (props) => {
         'Authorization': `Bearer ${props.user.token}`
       },
     }
-    fetch('http://localhost:8000/profiles', requestOptions)
+    fetch(`${apiUrl}/profiles`, requestOptions)
       .then(postedProfile=> {
         props.getProfile()
         navigate('/')

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
- 
+import apiUrl from '../../../apiConfig';
+
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51K6PZKAPJKSXew76gFW4UmquGYQXmllbtBUGoJUnMv9NUIMZLBbLqogc6cwPxKEkVw9CpxmyPoMTfO0ue0HSw5ZQ00qoIaU4tC");
@@ -106,7 +107,7 @@ function Checkout(props) {
                 'Authorization': `Bearer ${props.user.token}`
               },
         }
-        fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+        fetch(`${apiUrl}/profiles/user/${props.user._id}`, requestOptions)
             .then(patchedProfile=> {
                 console.log("subscription saved", patchedProfile)
                 props.getProfile()

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import apiUrl from '../apiConfig'
 
 
 const Tag = (props) => {
@@ -11,7 +12,7 @@ const Tag = (props) => {
     }, [])
 
     const getTags = () => {
-    fetch('http://localhost:8000/tags')
+    fetch(`${apiUrl}/tags`)
         .then(res => res.json())
         .then(foundTags => {
             console.log('Found Tags by INDEX', foundTags.tags)
@@ -35,7 +36,7 @@ const Tag = (props) => {
             name: tags[0]._id,
             checked: Boolean(tags.name)
         }
-        fetch('http://localhost:8000/tags', {
+        fetch(`${apiUrl}/tags`, {
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/json' }

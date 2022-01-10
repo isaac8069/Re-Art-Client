@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 import { Form, Button, Card } from 'react-bootstrap'
-import Tag from '../../Tag'
-import messages from '../../shared/AutoDismissAlert/messages'
+import apiUrl from '../../../apiConfig'
+
 
 const box = {
   textAlign: 'left',
@@ -76,7 +75,7 @@ const EditProfile = (props) => {
 
   // api call the gets the tags
   const getTags = () => {
-    fetch('http://localhost:8000/tags')
+    fetch(`${apiUrl}/tags`)
       .then(res => res.json())
       .then(foundTags => {
         setTags(foundTags.tags)
@@ -104,7 +103,7 @@ const EditProfile = (props) => {
         'Authorization': `Bearer ${props.user.token}`
       },
     }
-    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+    fetch(`${apiUrl}/profiles/user/${props.user._id}`, requestOptions)
       .then(patchedProfile => {
         props.getProfile()
         navigate('/profile')
@@ -128,7 +127,7 @@ const EditProfile = (props) => {
         'Authorization': `Bearer ${props.user.token}`
       },
     }
-    fetch(`http://localhost:8000/profiles/user/${props.user._id}`, requestOptions)
+    fetch(`${apiUrl}/profiles/user/${props.user._id}`, requestOptions)
       .then(patchedProfile => {
         props.getProfile()
         navigate('/profile')
@@ -136,7 +135,7 @@ const EditProfile = (props) => {
       .catch(err => console.error(err))
   }
 
-  // Funtion that runs when cancle button is pressed that takes user back to existing profile
+  // Funtion that runs when cancel button is pressed that takes user back to existing profile
   const goBack = () => {
     return navigate('/profile')
   }

@@ -5,6 +5,7 @@ import Pieces from './Pieces'
 import { useNavigate } from 'react-router-dom'
 // button styling
 import { Button } from 'react-bootstrap'
+import apiUrl from '../../../apiConfig'
 
 
 const button = {
@@ -38,7 +39,7 @@ const Filtered_Art = (props) => {
   const [art, setArt] = useState([])
   // useEffect that access the Server API
   useEffect(() => {
-      fetch(`http://localhost:8000/pieces/profile/${props.profile._id}`)
+      fetch(`${apiUrl}/pieces/profile/${props.profile._id}`)
       .then(res => res.json())
       .then(foundPieces=>{
           // Sets API data to state allArt
