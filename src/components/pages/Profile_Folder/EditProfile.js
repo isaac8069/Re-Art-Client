@@ -111,7 +111,7 @@ const EditProfile = (props) => {
       .catch(err => console.error(err))
   }
 
-  // Function runs any time user press the cancle subscription button
+  // Function runs any time user press the cancel subscription button
   // Sends a object with only the isSubscribed attribute as a PATCH request to our data base
   // At end runs getProfile to ensure that our profile in App.js is up to date
   const patchSubscription = (e) => {
@@ -177,7 +177,7 @@ const EditProfile = (props) => {
             Cancel
           </Button>
           <Button hidden={!currentProfile.isSubscribed} variant="danger" type="goBack" onClick={patchSubscription} style={button}>
-            Cancle Subscription
+            Cancel Subscription
           </Button>
         </Form>
       </div>
